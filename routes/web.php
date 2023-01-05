@@ -18,7 +18,19 @@ Route::get('login', function () {
 })->name('login');
 
 Route::get('/', function () {
-    return redirect('admin');
+    return view('welcome');
+});
+
+Route::get('about', function () {
+    return view('about');
+});
+
+Route::get('contact', function () {
+    return view('contact');
+});
+
+Route::get('category/{slug}', function ($slug) {
+    return view('category', compact('slug'));
 });
 
 
