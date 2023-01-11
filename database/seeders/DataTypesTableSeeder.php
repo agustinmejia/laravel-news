@@ -91,6 +91,42 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2022-05-24 15:21:20',
                 'updated_at' => '2022-05-24 15:21:20',
             ),
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'categories',
+                'slug' => 'categories',
+                'display_name_singular' => 'Categoría',
+                'display_name_plural' => 'Categorías',
+                'icon' => 'voyager-list',
+                'model_name' => 'App\\Models\\Category',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-01-06 19:22:46',
+                'updated_at' => '2023-01-06 19:43:33',
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'name' => 'posts',
+                'slug' => 'posts',
+                'display_name_singular' => 'Post',
+                'display_name_plural' => 'Posts',
+                'icon' => 'voyager-news',
+                'model_name' => 'App\\Models\\Post',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-01-06 19:40:43',
+                'updated_at' => '2023-01-06 19:58:20',
+            ),
         ));
         
         

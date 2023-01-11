@@ -4,13 +4,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>DelfinTV | Bienvenido</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
+        <title>{{ setting('site.title') }} | Bienvenido</title>
+        <meta content="{{ setting('site.description') }}" name="description">
+        <meta content="{{ setting('site.keyboards') }}" name="keywords">
 
-        <!-- Favicons -->
-        <link href="{{ asset('images/icon-alt.png') }}" rel="icon">
-        <link href="{{ asset('images/icon-alt.png') }}" rel="apple-touch-icon">
+        <!-- Favicon -->
+        @php
+            $icon = Voyager::setting('site.logo', '../images/icon.png');
+        @endphp
+        <link rel="shortcut icon" href="{{ Voyager::image($icon) }}" type="image/png">
+
+        @yield('seo')
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,8 +46,8 @@
 
             <a href="{{ url('') }}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                {{-- <img src="images/icon.png" alt=""> --}}
-                <h1>DelfinTV</h1>
+                <img src="{{ Voyager::image($icon) }}" alt="">
+                <h1>MiBlog</h1>
             </a>
 
             <nav id="navbar" class="navbar">
@@ -74,9 +78,21 @@
             </nav><!-- .navbar -->
 
             <div class="position-relative">
-                <a href="#" class="mx-2"><span class="bi-facebook"></span></a>
-                <a href="#" class="mx-2"><span class="bi-twitter"></span></a>
-                <a href="#" class="mx-2"><span class="bi-instagram"></span></a>
+                @if (setting('social.facebook'))
+                    <a href="{{ setting('social.facebook') }}" target="_blank" class="mx-2"><span class="bi-facebook"></span></a>    
+                @endif
+                @if (setting('social.twitter'))
+                    <a href="{{ setting('social.twitter') }}" target="_blank" class="mx-2"><span class="bi-twitter"></span></a>
+                @endif
+                @if (setting('social.instagram'))
+                    <a href="{{ setting('social.instagram') }}" target="_blank" class="mx-2"><span class="bi-instagram"></span></a>
+                @endif
+                @if (setting('social.youtube'))
+                    <a href="{{ setting('social.youtube') }}" target="_blank" class="mx-2"><span class="bi-youtube"></span></a>
+                @endif
+                @if (setting('social.whatsapp'))
+                    <a href="{{ setting('social.whatsapp') }}" target="_blank"class="mx-2"><span class="bi-whatsapp"></span></a>
+                @endif
 
                 <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -208,11 +224,21 @@
 
                     <div class="col-md-6">
                         <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
-                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                            @if (setting('social.facebook'))
+                                <a href="{{ setting('social.facebook') }}" target="_blank" class="mx-2"><span class="bi-facebook"></span></a>    
+                            @endif
+                            @if (setting('social.twitter'))
+                                <a href="{{ setting('social.twitter') }}" target="_blank" class="mx-2"><span class="bi-twitter"></span></a>
+                            @endif
+                            @if (setting('social.instagram'))
+                                <a href="{{ setting('social.instagram') }}" target="_blank" class="mx-2"><span class="bi-instagram"></span></a>
+                            @endif
+                            @if (setting('social.youtube'))
+                                <a href="{{ setting('social.youtube') }}" target="_blank" class="mx-2"><span class="bi-youtube"></span></a>
+                            @endif
+                            @if (setting('social.whatsapp'))
+                                <a href="{{ setting('social.whatsapp') }}" target="_blank" class="mx-2"><span class="bi-whatsapp"></span></a>
+                            @endif
                         </div>
 
                     </div>

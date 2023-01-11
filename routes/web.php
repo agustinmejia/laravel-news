@@ -33,6 +33,10 @@ Route::get('category/{slug}', function ($slug) {
     return view('category', compact('slug'));
 });
 
+Route::get('post/{slug}', function ($slug) {
+    return view('post', compact('slug'));
+});
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
