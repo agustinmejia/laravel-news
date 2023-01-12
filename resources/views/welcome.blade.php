@@ -1,16 +1,24 @@
 @extends('layouts.master')
 
 @section('seo')
+    <title>{{ setting('site.title') }} | Bienvenido</title>
+    <meta content="{{ setting('site.description') }}" name="description">
+    <meta content="{{ setting('site.keyboards') }}" name="keywords">
+    
     @php
         $icon = Voyager::setting('site.logo', '../images/icon.png');
     @endphp
 
-    <meta property="og:url"           content="{{url('')}}" />
+    <meta property="og:url"           content="{{ url('') }}" />
     <meta property="og:type"          content="Blog" />
     <meta property="og:title"         content="{{ setting('site.title') }}" />
     <meta property="og:description"   content="{{ setting('site.description') }}" />
     <meta property="og:image"         content="{{ Voyager::image($icon) }}" />
 @endsection
+
+@php
+    $meses = array("","Ene","Feb","Mar","Abr","May","Jun","Jul","Agos","Sept","Oct","Nov","Dic");
+@endphp
 
 @section('content')
     <main id="main">
@@ -21,51 +29,35 @@
                 <div class="row">
                 <div class="col-12">
                     <div class="swiper sliderFeaturedPosts">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                        <a href="{{ url('post/loren-ipsum') }}" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-1.jpg');">
-                            <div class="img-bg-inner">
-                            <h2>The Best Homemade Masks for Face (keep the Pimples Away)</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
-                            </div>
-                        </a>
+                        <div class="swiper-wrapper">
+                            @php
+                                $banners = App\Models\Post::where('type', 'portada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('views', 'DESC')->get();
+                            @endphp
+                            @forelse ($banners as $item)
+                                <div class="swiper-slide">
+                                    <a href="{{ url('post/'.$item->slug) }}" class="img-bg d-flex align-items-end" style="background-image: url('{{ asset('storage/'.$item->banner) }}');">
+                                        <div class="img-bg-inner">
+                                            <h2>{{ $item->title }}</h2>
+                                            <p>{{ $item->subtitle }}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            @empty
+                                <a href="#" class="img-bg d-flex align-items-end" style="background-image: url('{{ asset('images/banner.jpg') }}');">
+                                    <div class="img-bg-inner">
+                                        <h2>{{ setting('site.title') }}</h2>
+                                        <p>{{ setting('site.description') }}</p>
+                                    </div>
+                                </a>
+                            @endforelse
                         </div>
-
-                        <div class="swiper-slide">
-                        <a href="{{ url('post/loren-ipsum') }}" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-2.jpg');">
-                            <div class="img-bg-inner">
-                            <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
-                            </div>
-                        </a>
+                        <div class="custom-swiper-button-next">
+                            <span class="bi-chevron-right"></span>
                         </div>
-
-                        <div class="swiper-slide">
-                        <a href="{{ url('post/loren-ipsum') }}" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-3.jpg');">
-                            <div class="img-bg-inner">
-                            <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
-                            </div>
-                        </a>
+                        <div class="custom-swiper-button-prev">
+                            <span class="bi-chevron-left"></span>
                         </div>
-
-                        <div class="swiper-slide">
-                        <a href="{{ url('post/loren-ipsum') }}" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-4.jpg');">
-                            <div class="img-bg-inner">
-                            <h2>9 Half-up/half-down Hairstyles for Long and Medium Hair</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
-                            </div>
-                        </a>
-                        </div>
-                    </div>
-                    <div class="custom-swiper-button-next">
-                        <span class="bi-chevron-right"></span>
-                    </div>
-                    <div class="custom-swiper-button-prev">
-                        <span class="bi-chevron-left"></span>
-                    </div>
-
-                    <div class="swiper-pagination"></div>
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
                 </div>
@@ -75,103 +67,92 @@
         <!-- ======= Post Grid Section ======= -->
         <section id="posts" class="posts">
             <div class="container" data-aos="fade-up">
+                @php
+                    $trendings = App\Models\Post::where('type', 'destacada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('views', 'DESC')->get();
+                @endphp
                 <div class="row g-5">
-                    <div class="col-lg-4">
-                        <div class="post-entry-1 lg">
-                        <a href="{{ url('post/loren-ipsum') }}"><img src="assets/img/post-landscape-1.jpg" alt="" class="img-fluid"></a>
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                        <h2><a href="{{ url('post/loren-ipsum') }}">11 Work From Home Part-Time Jobs You Can Do Now</a></h2>
-                        <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus repudiandae, inventore pariatur numquam cumque possimus exercitationem? Nihil tempore odit ab minus eveniet praesentium, similique blanditiis molestiae ut saepe perspiciatis officia nemo, eos quae cumque. Accusamus fugiat architecto rerum animi atque eveniet, quo, praesentium dignissimos</p>
+                    @if ($trendings->count() > 0)
+                        @php
+                            $post = $trendings[0];
+                            $publish_date = Carbon\Carbon::parse($post->publish_date);
+                        @endphp
+                        <div class="col-lg-4">
+                            <div class="post-entry-1 lg">
+                                <a href="{{ url('post/'.$post->slug) }}"><img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid"></a>
+                                <div class="post-meta"><span class="date">{{ $post->category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                <h2><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
+                                <p class="mb-4 d-block">{{ $post->subtitle }}</p>
 
-                        <div class="d-flex align-items-center author">
-                            <div class="photo"><img src="assets/img/person-1.jpg" alt="" class="img-fluid"></div>
-                            <div class="name">
-                            <h3 class="m-0 p-0">Cameron Williamson</h3>
+                                @if ($post->user)
+                                    <div class="d-flex align-items-center author">
+                                        <div class="photo"><img src="{{ asset('storage/'.$post->user->avatar) }}" alt="{{ $post->user->name }}" class="img-fluid"></div>
+                                        <div class="name">
+                                            <h3 class="m-0 p-0">{{ $post->user->name }}</h3>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                        </div>
-
-                    </div>
+                    @endif
 
                     <div class="col-lg-8">
                         <div class="row g-5">
-                            <div class="col-lg-4 border-start custom-border">
-                                <div class="post-entry-1">
-                                <a href="{{ url('post/loren-ipsum') }}"><img src="assets/img/post-landscape-2.jpg" alt="" class="img-fluid"></a>
-                                <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                <h2><a href="{{ url('post/loren-ipsum') }}">Let’s Get Back to Work, New York</a></h2>
+                            @if ($trendings->count() > 1)
+                                <div class="col-lg-4 border-start custom-border">
+                                    @foreach ($trendings->skip(1)->take(3) as $post)
+                                        @php
+                                            $publish_date = Carbon\Carbon::parse($post->publish_date);
+                                        @endphp
+                                        <div class="post-entry-1">
+                                            <a href="{{ url('post/'.$post->slug) }}"><img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid"></a>
+                                            <div class="post-meta"><span class="date">{{ $post->category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                            <h2><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <div class="post-entry-1">
-                                <a href="{{ url('post/loren-ipsum') }}"><img src="assets/img/post-landscape-5.jpg" alt="" class="img-fluid"></a>
-                                <div class="post-meta"><span class="date">Food</span> <span class="mx-1">&bullet;</span> <span>Jul 17th '22</span></div>
-                                <h2><a href="{{ url('post/loren-ipsum') }}">How to Avoid Distraction and Stay Focused During Video Calls?</a></h2>
+                            @endif
+                            @if ($trendings->count() > 3)
+                                <div class="col-lg-4 border-start custom-border">
+                                    @foreach ($trendings->skip(4)->take(3) as $post)
+                                        @php
+                                            $publish_date = Carbon\Carbon::parse($post->publish_date);
+                                        @endphp
+                                        <div class="post-entry-1">
+                                            <a href="{{ url('post/'.$post->slug) }}"><img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid"></a>
+                                            <div class="post-meta"><span class="date">{{ $post->category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                            <h2><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <div class="post-entry-1">
-                                <a href="{{ url('post/loren-ipsum') }}"><img src="assets/img/post-landscape-7.jpg" alt="" class="img-fluid"></a>
-                                <div class="post-meta"><span class="date">Design</span> <span class="mx-1">&bullet;</span> <span>Mar 15th '22</span></div>
-                                <h2><a href="{{ url('post/loren-ipsum') }}">Why Craigslist Tampa Is One of The Most Interesting Places On the Web?</a></h2>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 border-start custom-border">
-                                <div class="post-entry-1">
-                                <a href="{{ url('post/loren-ipsum') }}"><img src="assets/img/post-landscape-3.jpg" alt="" class="img-fluid"></a>
-                                <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                <h2><a href="{{ url('post/loren-ipsum') }}">6 Easy Steps To Create Your Own Cute Merch For Instagram</a></h2>
-                                </div>
-                                <div class="post-entry-1">
-                                <a href="{{ url('post/loren-ipsum') }}"><img src="assets/img/post-landscape-6.jpg" alt="" class="img-fluid"></a>
-                                <div class="post-meta"><span class="date">Tech</span> <span class="mx-1">&bullet;</span> <span>Mar 1st '22</span></div>
-                                <h2><a href="{{ url('post/loren-ipsum') }}">10 Life-Changing Hacks Every Working Mom Should Know</a></h2>
-                                </div>
-                                <div class="post-entry-1">
-                                <a href="{{ url('post/loren-ipsum') }}"><img src="assets/img/post-landscape-8.jpg" alt="" class="img-fluid"></a>
-                                <div class="post-meta"><span class="date">Travel</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                <h2><a href="{{ url('post/loren-ipsum') }}">5 Great Startup Tips for Female Founders</a></h2>
-                                </div>
-                            </div>
+                            @endif
 
                             <!-- Trending Section -->
                             <div class="col-lg-4">
 
                                 <div class="trending">
-                                <h3>Tendencias</h3>
-                                <ul class="trending-post">
-                                    <li>
-                                    <a href="{{ url('post/loren-ipsum') }}">
-                                        <span class="number">1</span>
-                                        <h3>The Best Homemade Masks for Face (keep the Pimples Away)</h3>
-                                        <span class="author">Jane Cooper</span>
-                                    </a>
-                                    </li>
-                                    <li>
-                                    <a href="{{ url('post/loren-ipsum') }}">
-                                        <span class="number">2</span>
-                                        <h3>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h3>
-                                        <span class="author">Wade Warren</span>
-                                    </a>
-                                    </li>
-                                    <li>
-                                    <a href="{{ url('post/loren-ipsum') }}">
-                                        <span class="number">3</span>
-                                        <h3>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h3>
-                                        <span class="author">Esther Howard</span>
-                                    </a>
-                                    </li>
-                                    <li>
-                                    <a href="{{ url('post/loren-ipsum') }}">
-                                        <span class="number">4</span>
-                                        <h3>9 Half-up/half-down Hairstyles for Long and Medium Hair</h3>
-                                        <span class="author">Cameron Williamson</span>
-                                    </a>
-                                    </li>
-                                    <li>
-                                    <a href="{{ url('post/loren-ipsum') }}">
-                                        <span class="number">5</span>
-                                        <h3>Life Insurance And Pregnancy: A Working Mom’s Guide</h3>
-                                        <span class="author">Jenny Wilson</span>
-                                    </a>
-                                    </li>
-                                </ul>
+                                    <h3>Tendencias</h3>
+                                    @if ($trendings->count() > 7)
+                                        <ul class="trending-post">
+                                            @php
+                                                $cont = 1;
+                                            @endphp
+                                            @foreach ($trendings->skip(7)->take(5) as $post)
+                                                @php
+                                                    $publish_date = Carbon\Carbon::parse($post->publish_date);
+                                                @endphp
+                                                <li>
+                                                    <a href="{{ url('post/'.$post->slug) }}">
+                                                        <span class="number">{{ $cont }}</span>
+                                                        <h3>{{ $post->title }}</h3>
+                                                        <span class="author">{{ $post->user ? $post->user->name : '' }}</span>
+                                                    </a>
+                                                </li>
+                                                @php
+                                                    $cont++;
+                                                @endphp
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
 
                             </div> <!-- End Trending Section -->
@@ -182,32 +163,125 @@
             </div>
         </section> <!-- End Post Grid Section -->
 
-        <!-- ======= Culture Category Section ======= -->
-        <section class="category-section">
-            <div class="container" data-aos="fade-up">
+        @php
+            $categories = App\Models\Category::where('deleted_at', NULL)
+                            ->whereHas('posts', function($q){
+                                $q->whereRaw('(type is null or type = "")')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('views', 'DESC');
+                            })->orderBy('order')->get();
+            // dd($categories);
+            $cont = 1;
+        @endphp
 
-                <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                    <h2>Política</h2>
-                    <div><a href="category.html" class="more">Ver todos</a></div>
+        @foreach ($categories as $category)
+            <section class="category-section">
+                <div class="container" data-aos="fade-up">
+                    <div class="section-header d-flex justify-content-between align-items-center mb-5">
+                        <h2>{{ $category->name }}</h2>
+                        <div><a href="{{ url('category/'.$category->slug) }}" class="more">Ver todos</a></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-9 {{--  Alternar estilos de secciones --}} @if ($cont %2 == 0) order-md-2 @endif">
+                            @php
+                                $post = $category->posts[0];
+                                $publish_date = Carbon\Carbon::parse($post->publish_date);
+                            @endphp
+                            <div class="d-lg-flex post-entry-2">
+                                <a href="{{ url('post/'.$post->slug) }}" class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block">
+                                    <img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid">
+                                </a>
+                                <div>
+                                    <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                    <h3><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h3>
+                                    <p>{{ $post->subtitle }}</p>
+                                    @if ($post->user)
+                                        <div class="d-flex align-items-center author">
+                                            <div class="photo"><img src="{{ asset('storage/'.$post->user->avatar) }}" alt="{{ $post->user->name }}" class="img-fluid"></div>
+                                            <div class="name">
+                                                <h3 class="m-0 p-0">{{ $post->user->name }}</h3>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                    
+                            <div class="row">
+                                @php
+                                    $post = null;
+                                    if($category->posts->count() > 1){
+                                        $post = $category->posts[1];
+                                        $publish_date = Carbon\Carbon::parse($post->publish_date);
+                                    }
+                                @endphp
+                                @if ($post)
+                                    <div class="col-lg-8 order-md-2">
+                                        <div class="post-entry-1">
+                                            <a href="{{ url('post/'.$post->slug) }}"><img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid"></a>
+                                            <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                            <h2 class="mb-2"><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
+                                            <span class="author mb-3 d-block">{{ $post->user ? $post->user->name : '' }}</span>
+                                            <p class="mb-4 d-block">{{ $post->subtitle }}</p>
+                                        </div>
+                                    </div>    
+                                @endif
+                                
+                                <div class="col-lg-4">
+                                    @php
+                                        $post = null;
+                                        if($category->posts->count() > 2){
+                                            $post = $category->posts[2];
+                                            $publish_date = Carbon\Carbon::parse($post->publish_date);
+                                        }
+                                    @endphp
+                                    @if ($post)
+                                        <div class="post-entry-1 border-bottom">
+                                            <a href="{{ url('post/'.$post->slug) }}"><img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid"></a>
+                                            <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                            <h2 class="mb-2"><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
+                                            <span class="author mb-3 d-block">{{ $post->user ? $post->user->name : '' }}</span>
+                                            <p class="mb-4 d-block">{{ $post->subtitle }}</p>
+                                        </div>
+                                    @endif
+                    
+                                    @php
+                                        $fourth_post = null;
+                                        if($category->posts->count() > 3){
+                                            $fourth_post = $category->posts[3];
+                                            $publish_date = Carbon\Carbon::parse($post->publish_date);
+                                        }
+                                    @endphp
+                                    @if ($fourth_post)
+                                        <div class="post-entry-1">
+                                            <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                            <h2 class="mb-2"><a href="{{ url('post/'.$fourth_post->slug) }}">{{ $fourth_post->title }}</a></h2>
+                                            <span class="author mb-3 d-block">{{ $fourth_post->user ? $fourth_post->user->name : '' }}</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-3">
+                            @if ($category->posts->count() > 4)
+                                @for ($i = 4; $i < $category->posts->count(); $i++)
+                                    @php
+                                        $post = $category->posts[$i];
+                                        $publish_date = Carbon\Carbon::parse($post->publish_date);
+                                    @endphp
+                                    <div class="post-entry-1 border-bottom">
+                                        <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                        <h2 class="mb-2"><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
+                                        <span class="author mb-3 d-block">{{ $post->user ? $post->user->name : '' }}</span>
+                                    </div>
+                                @endfor
+                            @endif
+                        </div>
+                    </div>
                 </div>
-
-                @include('partials.section-1')
-            </div>
-        </section><!-- End Culture Category Section -->
-
-        <!-- ======= Business Category Section ======= -->
-        <section class="category-section">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                    <h2>Negocios</h2>
-                    <div><a href="category.html" class="more">Ver todos</a></div>
-                </div>
-
-                @include('partials.section-2')
-            </div>
-        </section>
-        <!-- End Business Category Section -->
-
+            </section>
+            @php
+                $cont++;
+            @endphp
+        @endforeach
     </main>
 @endsection

@@ -10,4 +10,8 @@ class Category extends Model
 {
     use HasFactory, SoftDeletes;
     protected $dates = ['deleted_at'];
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }

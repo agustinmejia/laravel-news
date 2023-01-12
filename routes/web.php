@@ -34,7 +34,10 @@ Route::get('category/{slug}', function ($slug) {
 });
 
 Route::get('post/{slug}', function ($slug) {
-    return view('post', compact('slug'));
+    $post = App\Models\Post::where('slug', $slug)->first();
+    $post->views = $post->views +1;
+    $post->update();
+    return view('post', compact('post'));
 });
 
 

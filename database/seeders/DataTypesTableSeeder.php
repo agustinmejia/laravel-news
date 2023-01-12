@@ -114,8 +114,8 @@ class DataTypesTableSeeder extends Seeder
                 'id' => 6,
                 'name' => 'posts',
                 'slug' => 'posts',
-                'display_name_singular' => 'Post',
-                'display_name_plural' => 'Posts',
+                'display_name_singular' => 'Noticia',
+                'display_name_plural' => 'Noticias',
                 'icon' => 'voyager-news',
                 'model_name' => 'App\\Models\\Post',
                 'policy_name' => NULL,
@@ -125,7 +125,7 @@ class DataTypesTableSeeder extends Seeder
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
                 'created_at' => '2023-01-06 19:40:43',
-                'updated_at' => '2023-01-06 19:58:20',
+                'updated_at' => '2023-01-12 09:48:23',
             ),
         ));
         

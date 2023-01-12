@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->text('title')->nullable();
             $table->text('subtitle')->nullable();
             $table->text('body')->nullable();
-            $table->string('slug')->unique();
+            $table->text('slug')->unique();
             $table->string('banner')->nullable();
             $table->string('tags')->nullable();
             $table->string('status')->nullable()->default('borrador');

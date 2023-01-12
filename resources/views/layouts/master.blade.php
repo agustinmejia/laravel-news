@@ -4,9 +4,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{{ setting('site.title') }} | Bienvenido</title>
-        <meta content="{{ setting('site.description') }}" name="description">
-        <meta content="{{ setting('site.keyboards') }}" name="keywords">
 
         <!-- Favicon -->
         @php
@@ -40,6 +37,10 @@
         ======================================================== -->
     </head>
     <body>
+        
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v15.0&appId=2989546164659083&autoLogAppEvents=1" nonce="gLusA6cu"></script>
+        
         <!-- ======= Header ======= -->
         <header id="header" class="header d-flex align-items-center fixed-top">
             <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -47,32 +48,21 @@
             <a href="{{ url('') }}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="{{ Voyager::image($icon) }}" alt="">
-                <h1>MiBlog</h1>
+                <h1>{{ setting('site.title') }}</h1>
             </a>
 
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a href="{{ url('') }}">Blog</a></li>
-                {{-- <li><a href="single-post.html">Single Post</a></li> --}}
+                <li><a href="{{ url('') }}">Inicio</a></li>
+                <li><a href="{{ url('about') }}">Acerca de</a></li>
                 <li class="dropdown"><a href=""><span>Categorías</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
-                    <li><a href="{{ url('category/cultura') }}">Cultura</a></li>
-                    {{-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                        <ul>
-                        <li><a href="#">Deep Drop Down 1</a></li>
-                        <li><a href="#">Deep Drop Down 2</a></li>
-                        <li><a href="#">Deep Drop Down 3</a></li>
-                        <li><a href="#">Deep Drop Down 4</a></li>
-                        <li><a href="#">Deep Drop Down 5</a></li>
-                        </ul>
-                    </li> --}}
-                    <li><a href="{{ url('category/deportes') }}">Deportes</a></li>
-                    <li><a href="{{ url('category/negocio') }}">Negocios</a></li>
-                    <li><a href="#">Drop Down 4</a></li>
+                        @foreach (App\Models\Category::where('deleted_at', NULL)->orderBy('order')->get() as $item)
+                            <li><a href="{{ url('category/'.$item->slug) }}">{{ $item->name }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
-
-                <li><a href="{{ url('about') }}">Acerca de</a></li>
+                <li><a href="{{ url('') }}">Cara a Cara</a></li>
                 <li><a href="{{ url('contact') }}">Contacto</a></li>
                 </ul>
             </nav><!-- .navbar -->
@@ -99,11 +89,11 @@
 
                 <!-- ======= Search Form ======= -->
                 <div class="search-form-wrap js-search-form-wrap">
-                <form action="search-result.html" class="search-form">
-                    <span class="icon bi-search"></span>
-                    <input type="text" placeholder="Buscar" class="form-control">
-                    <button class="btn js-search-close"><span class="bi-x"></span></button>
-                </form>
+                    <form action="search-result.html" class="search-form">
+                        <span class="icon bi-search"></span>
+                        <input type="text" placeholder="Buscar" class="form-control">
+                        <button class="btn js-search-close"><span class="bi-x"></span></button>
+                    </form>
                 </div><!-- End Search Form -->
 
             </div>
@@ -122,33 +112,24 @@
 
                 <div class="row g-5">
                 <div class="col-lg-4">
-                    <h3 class="footer-heading">DelfinTV</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ab, perspiciatis beatae autem deleniti voluptate nulla a dolores, exercitationem eveniet libero laudantium recusandae officiis qui aliquid blanditiis omnis quae. Explicabo?</p>
+                    <h3 class="footer-heading">{{ setting('site.title') }}</h3>
+                    <p>{{ setting('site.description') }}</p>
                     <p><a href="{{ url('about') }}" class="footer-link-more">Ver más</a></p>
                 </div>
                 <div class="col-6 col-lg-2">
                     <h3 class="footer-heading">Enlaces</h3>
                     <ul class="footer-links list-unstyled">
-                    <li><a href="{{ url('') }}"><i class="bi bi-chevron-right"></i> Home</a></li>
-                    <li><a href="index.html"><i class="bi bi-chevron-right"></i> Blog</a></li>
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Categories</a></li>
-                    <li><a href="single-post.html"><i class="bi bi-chevron-right"></i> Single Post</a></li>
-                    <li><a href="about.html"><i class="bi bi-chevron-right"></i> About us</a></li>
-                    <li><a href="contact.html"><i class="bi bi-chevron-right"></i> Contact</a></li>
+                    <li><a href="{{ url('') }}"><i class="bi bi-chevron-right"></i> Inicio</a></li>
+                    <li><a href="{{ url('about') }}"><i class="bi bi-chevron-right"></i> Acerca de</a></li>
+                    <li><a href="{{ url('contact') }}"><i class="bi bi-chevron-right"></i> Contacto</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-2">
                     <h3 class="footer-heading">Categorías</h3>
                     <ul class="footer-links list-unstyled">
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Business</a></li>
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Culture</a></li>
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Sport</a></li>
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Food</a></li>
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Politics</a></li>
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Celebrity</a></li>
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Startups</a></li>
-                    <li><a href="category.html"><i class="bi bi-chevron-right"></i> Travel</a></li>
-
+                        @foreach (App\Models\Category::where('deleted_at', NULL)->limit(5)->orderBy('order')->get() as $item)
+                            <li><a href="{{ url('category/'.$item->slug) }}"><i class="bi bi-chevron-right"></i> {{ $item->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
 

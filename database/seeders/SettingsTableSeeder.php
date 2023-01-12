@@ -60,7 +60,7 @@ class SettingsTableSeeder extends Seeder
                 'value' => NULL,
                 'details' => '',
                 'type' => 'text',
-                'order' => 6,
+                'order' => 16,
                 'group' => 'Site',
             ),
             4 => 
@@ -194,6 +194,61 @@ class SettingsTableSeeder extends Seeder
                 'type' => 'text',
                 'order' => 11,
                 'group' => 'Social',
+            ),
+            16 => 
+            array (
+                'id' => 18,
+                'key' => 'acerca-de.banner',
+                'display_name' => 'Banner',
+                'value' => '',
+                'details' => NULL,
+                'type' => 'image',
+                'order' => 12,
+                'group' => 'Acerca de',
+            ),
+            17 => 
+            array (
+                'id' => 19,
+                'key' => 'acerca-de.description',
+                'display_name' => 'Descripción',
+                'value' => '',
+                'details' => NULL,
+                'type' => 'text_area',
+                'order' => 13,
+                'group' => 'Acerca de',
+            ),
+            18 => 
+            array (
+                'id' => 20,
+                'key' => 'site.address',
+                'display_name' => 'Address',
+                'value' => '',
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 6,
+                'group' => 'Site',
+            ),
+            19 => 
+            array (
+                'id' => 21,
+                'key' => 'site.phone',
+                'display_name' => 'Phone',
+                'value' => '',
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 14,
+                'group' => 'Site',
+            ),
+            20 => 
+            array (
+                'id' => 22,
+                'key' => 'site.email',
+                'display_name' => 'Email',
+                'value' => '',
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 15,
+                'group' => 'Site',
             ),
         ));
         
