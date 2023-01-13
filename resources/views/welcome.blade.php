@@ -43,12 +43,14 @@
                                     </a>
                                 </div>
                             @empty
-                                <a href="#" class="img-bg d-flex align-items-end" style="background-image: url('{{ asset('images/banner.jpg') }}');">
-                                    <div class="img-bg-inner">
-                                        <h2>{{ setting('site.title') }}</h2>
-                                        <p>{{ setting('site.description') }}</p>
-                                    </div>
-                                </a>
+                                <div class="swiper-slide">
+                                    <a href="#" class="img-bg d-flex align-items-end" style="background-image: url('{{ asset('images/banner.jpg') }}');">
+                                        <div class="img-bg-inner">
+                                            <h2>{{ setting('site.title') }}</h2>
+                                            <p>{{ setting('site.description') }}</p>
+                                        </div>
+                                    </a>
+                                </div>
                             @endforelse
                         </div>
                         <div class="custom-swiper-button-next">
@@ -164,10 +166,11 @@
         </section> <!-- End Post Grid Section -->
 
         @php
-            $categories = App\Models\Category::where('deleted_at', NULL)
-                            ->whereHas('posts', function($q){
-                                $q->whereRaw('(type is null or type = "")')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('views', 'DESC');
-                            })->orderBy('order')->get();
+            $categories = App\Models\Category::whereHas('posts', function($q){
+                                $q->whereRaw('(type is null or type = "")')->where('status', 'publicado')->where('deleted_at', NULL);
+                            })->with(['posts' => function($q){
+                                $q->orderBy('order')->orderBy('views', 'DESC');
+                            }])->where('deleted_at', NULL)->orderBy('order')->get();
             // dd($categories);
             $cont = 1;
         @endphp
@@ -239,22 +242,22 @@
                                             <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
                                             <h2 class="mb-2"><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
                                             <span class="author mb-3 d-block">{{ $post->user ? $post->user->name : '' }}</span>
-                                            <p class="mb-4 d-block">{{ $post->subtitle }}</p>
+                                            <p class="mb-4 d-block subtitle-ellipsis">{{ $post->subtitle }}</p>
                                         </div>
                                     @endif
                     
                                     @php
-                                        $fourth_post = null;
+                                        $post = null;
                                         if($category->posts->count() > 3){
-                                            $fourth_post = $category->posts[3];
+                                            $post = $category->posts[3];
                                             $publish_date = Carbon\Carbon::parse($post->publish_date);
                                         }
                                     @endphp
-                                    @if ($fourth_post)
+                                    @if ($post)
                                         <div class="post-entry-1">
                                             <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
-                                            <h2 class="mb-2"><a href="{{ url('post/'.$fourth_post->slug) }}">{{ $fourth_post->title }}</a></h2>
-                                            <span class="author mb-3 d-block">{{ $fourth_post->user ? $fourth_post->user->name : '' }}</span>
+                                            <h2 class="mb-2"><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
+                                            <span class="author mb-3 d-block">{{ $post->user ? $post->user->name : '' }}</span>
                                         </div>
                                     @endif
                                 </div>
@@ -265,6 +268,10 @@
                             @if ($category->posts->count() > 4)
                                 @for ($i = 4; $i < $category->posts->count(); $i++)
                                     @php
+                                        if($i > 10){
+                                            break;
+                                        }
+
                                         $post = $category->posts[$i];
                                         $publish_date = Carbon\Carbon::parse($post->publish_date);
                                     @endphp
@@ -284,4 +291,17 @@
             @endphp
         @endforeach
     </main>
+@endsection
+
+@section('css')
+    <style>
+        .subtitle-ellipsis{
+            text-overflow:ellipsis;
+            overflow:hidden;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 10;
+            -webkit-box-orient: vertical;
+            white-space: normal;
+        }
+    </style>
 @endsection

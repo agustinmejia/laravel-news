@@ -17,10 +17,10 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('category_id')->nullable()->constrained('categories');
-            $table->text('title')->nullable();
+            $table->string('title', 255)->nullable();
             $table->text('subtitle')->nullable();
             $table->text('body')->nullable();
-            $table->text('slug')->unique();
+            $table->string('slug', 255)->unique();
             $table->string('banner')->nullable();
             $table->string('tags')->nullable();
             $table->string('status')->nullable()->default('borrador');

@@ -29,6 +29,8 @@
         <link href="{{ asset('assets/css/variables.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
+        @yield('css')
+
         <!-- =======================================================
         * Template Name: ZenBlog - v1.3.0
         * Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/
@@ -45,58 +47,63 @@
         <header id="header" class="header d-flex align-items-center fixed-top">
             <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-            <a href="{{ url('') }}" class="logo d-flex align-items-center">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="{{ Voyager::image($icon) }}" alt="">
-                <h1>{{ setting('site.title') }}</h1>
-            </a>
+                <a href="{{ url('') }}" class="logo d-flex align-items-center">
+                    @if(setting('site.navbar_logo'))
+                        @php
+                            $navbar = Voyager::setting('site.navbar_logo');
+                        @endphp
+                        <img src="{{ Voyager::image($navbar) }}" alt="{{ setting('site.title') }}" >
+                    @else
+                        <h1>{{ setting('site.title') }}</h1>
+                    @endif
+                </a>
 
-            <nav id="navbar" class="navbar">
-                <ul>
-                <li><a href="{{ url('') }}">Inicio</a></li>
-                <li><a href="{{ url('about') }}">Acerca de</a></li>
-                <li class="dropdown"><a href=""><span>Categorías</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <nav id="navbar" class="navbar">
                     <ul>
-                        @foreach (App\Models\Category::where('deleted_at', NULL)->orderBy('order')->get() as $item)
-                            <li><a href="{{ url('category/'.$item->slug) }}">{{ $item->name }}</a></li>
-                        @endforeach
+                    <li><a href="{{ url('') }}">Inicio</a></li>
+                    <li><a href="{{ url('about') }}">Acerca de</a></li>
+                    <li class="dropdown"><a href=""><span>Categorías</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                            @foreach (App\Models\Category::where('deleted_at', NULL)->orderBy('order')->get() as $item)
+                                <li><a href="{{ url('category/'.$item->slug) }}">{{ $item->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li><a href="{{ url('') }}">Cara a Cara</a></li>
+                    <li><a href="{{ url('contact') }}">Contacto</a></li>
                     </ul>
-                </li>
-                <li><a href="{{ url('') }}">Cara a Cara</a></li>
-                <li><a href="{{ url('contact') }}">Contacto</a></li>
-                </ul>
-            </nav><!-- .navbar -->
+                </nav><!-- .navbar -->
 
-            <div class="position-relative">
-                @if (setting('social.facebook'))
-                    <a href="{{ setting('social.facebook') }}" target="_blank" class="mx-2"><span class="bi-facebook"></span></a>    
-                @endif
-                @if (setting('social.twitter'))
-                    <a href="{{ setting('social.twitter') }}" target="_blank" class="mx-2"><span class="bi-twitter"></span></a>
-                @endif
-                @if (setting('social.instagram'))
-                    <a href="{{ setting('social.instagram') }}" target="_blank" class="mx-2"><span class="bi-instagram"></span></a>
-                @endif
-                @if (setting('social.youtube'))
-                    <a href="{{ setting('social.youtube') }}" target="_blank" class="mx-2"><span class="bi-youtube"></span></a>
-                @endif
-                @if (setting('social.whatsapp'))
-                    <a href="{{ setting('social.whatsapp') }}" target="_blank"class="mx-2"><span class="bi-whatsapp"></span></a>
-                @endif
+                <div class="position-relative">
+                    @if (setting('social.facebook'))
+                        <a href="{{ setting('social.facebook') }}" target="_blank" class="mx-2"><span class="bi-facebook"></span></a>    
+                    @endif
+                    @if (setting('social.twitter'))
+                        <a href="{{ setting('social.twitter') }}" target="_blank" class="mx-2"><span class="bi-twitter"></span></a>
+                    @endif
+                    @if (setting('social.instagram'))
+                        <a href="{{ setting('social.instagram') }}" target="_blank" class="mx-2"><span class="bi-instagram"></span></a>
+                    @endif
+                    @if (setting('social.youtube'))
+                        <a href="{{ setting('social.youtube') }}" target="_blank" class="mx-2"><span class="bi-youtube"></span></a>
+                    @endif
+                    @if (setting('social.whatsapp'))
+                        <a href="https://wa.me/{{ setting('social.whatsapp') ?? '59175199157' }}?text=Vi su página web" target="_blank"class="mx-2"><span class="bi-whatsapp"></span></a>
+                    @endif
 
-                <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
-                <i class="bi bi-list mobile-nav-toggle"></i>
+                    <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
 
-                <!-- ======= Search Form ======= -->
-                <div class="search-form-wrap js-search-form-wrap">
-                    <form action="search-result.html" class="search-form">
-                        <span class="icon bi-search"></span>
-                        <input type="text" placeholder="Buscar" class="form-control">
-                        <button class="btn js-search-close"><span class="bi-x"></span></button>
-                    </form>
-                </div><!-- End Search Form -->
+                    <!-- ======= Search Form ======= -->
+                    <div class="search-form-wrap js-search-form-wrap">
+                        <form action="search-result.html" class="search-form">
+                            <span class="icon bi-search"></span>
+                            <input type="text" placeholder="Buscar" class="form-control">
+                            <button class="btn js-search-close"><span class="bi-x"></span></button>
+                        </form>
+                    </div><!-- End Search Form -->
 
-            </div>
+                </div>
 
             </div>
 
@@ -218,7 +225,7 @@
                                 <a href="{{ setting('social.youtube') }}" target="_blank" class="mx-2"><span class="bi-youtube"></span></a>
                             @endif
                             @if (setting('social.whatsapp'))
-                                <a href="{{ setting('social.whatsapp') }}" target="_blank" class="mx-2"><span class="bi-whatsapp"></span></a>
+                                <a href="https://wa.me/{{ setting('social.whatsapp') ?? '59175199157' }}?text=Vi su página web" target="_blank" class="mx-2"><span class="bi-whatsapp"></span></a>
                             @endif
                         </div>
 
