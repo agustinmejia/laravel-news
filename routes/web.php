@@ -31,7 +31,7 @@ Route::get('contact', function () {
 
 Route::get('category/{slug}', function ($slug) {
     $category = App\Models\Category::with(['posts' => function($q){
-                    $q->where('status', 'publicado')->orderBy('order')->orderBy('views', 'DESC')->where('deleted_at', NULL);
+                    $q->where('status', 'publicado')->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->where('deleted_at', NULL);
                 }])->where('slug', $slug)->first();
     return view('category', compact('category'));
 });

@@ -107,7 +107,7 @@
                             <!-- Trending -->
                             <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
                                 @php
-                                    $trendings = App\Models\Post::where('type', 'destacada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('views', 'DESC')->limit(10)->get();
+                                    $trendings = App\Models\Post::where('type', 'destacada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->limit(10)->get();
                                 @endphp
                                 @forelse ($trendings as $post)
                                     @php
@@ -171,17 +171,4 @@
             </div>
         </section>
     </main>
-@endsection
-
-@section('css')
-    <style>
-        .subtitle-ellipsis{
-            text-overflow:ellipsis;
-            overflow:hidden;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 10;
-            -webkit-box-orient: vertical;
-            white-space: normal;
-        }
-    </style>
 @endsection

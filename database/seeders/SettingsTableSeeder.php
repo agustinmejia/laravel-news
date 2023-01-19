@@ -268,6 +268,28 @@ En consecuencia, presentamos temas que interesan, divierten y emocionan, y cuand
                 'order' => 6,
                 'group' => 'Site',
             ),
+            22 => 
+            array (
+                'id' => 24,
+                'key' => 'streaming.iframe',
+                'display_name' => 'Código de inserción',
+                'value' => '<iframe width="100%" src="https://cloudvideo.servers10.com:2020/VideoPlayer/8226?autoplay=1" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" scrolling="no" frameborder="0" allow="autoplay" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>',
+                'details' => NULL,
+                'type' => 'text_area',
+                'order' => 19,
+                'group' => 'Streaming',
+            ),
+            23 => 
+            array (
+                'id' => 25,
+                'key' => 'streaming.status',
+                'display_name' => 'Estado',
+                'value' => '1',
+                'details' => NULL,
+                'type' => 'checkbox',
+                'order' => 18,
+                'group' => 'Streaming',
+            ),
         ));
         
         

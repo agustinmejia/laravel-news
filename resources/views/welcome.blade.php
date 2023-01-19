@@ -31,7 +31,7 @@
                     <div class="swiper sliderFeaturedPosts">
                         <div class="swiper-wrapper">
                             @php
-                                $banners = App\Models\Post::where('type', 'portada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('views', 'DESC')->get();
+                                $banners = App\Models\Post::where('type', 'portada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->get();
                             @endphp
                             @forelse ($banners as $item)
                                 <div class="swiper-slide">
@@ -70,7 +70,7 @@
         <section id="posts" class="posts">
             <div class="container" data-aos="fade-up">
                 @php
-                    $trendings = App\Models\Post::where('type', 'destacada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('views', 'DESC')->get();
+                    $trendings = App\Models\Post::where('type', 'destacada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->get();
                 @endphp
                 <div class="row g-5">
                     @if ($trendings->count() > 0)
@@ -79,6 +79,14 @@
                             $publish_date = Carbon\Carbon::parse($post->publish_date);
                         @endphp
                         <div class="col-lg-4">
+                            @if (setting('streaming.status') && setting('streaming.iframe'))
+                                <div class="post-entry-1 lg">
+                                    <h3>En vivo</h3>
+                                    <div style="position: relative; overflow: hidden; width: 100%;padding-top: 56.25%;">
+                                        {!! setting('streaming.iframe') !!}
+                                    </div>
+                                </div>
+                            @endif
                             <div class="post-entry-1 lg">
                                 <a href="{{ url('post/'.$post->slug) }}"><img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid"></a>
                                 <div class="post-meta"><span class="date">{{ $post->category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
@@ -169,7 +177,7 @@
             $categories = App\Models\Category::whereHas('posts', function($q){
                                 $q->whereRaw('(type is null or type = "")')->where('status', 'publicado')->where('deleted_at', NULL);
                             })->with(['posts' => function($q){
-                                $q->orderBy('order')->orderBy('views', 'DESC');
+                                $q->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC');
                             }])->where('deleted_at', NULL)->orderBy('order')->get();
             // dd($categories);
             $cont = 1;
@@ -291,17 +299,4 @@
             @endphp
         @endforeach
     </main>
-@endsection
-
-@section('css')
-    <style>
-        .subtitle-ellipsis{
-            text-overflow:ellipsis;
-            overflow:hidden;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 10;
-            -webkit-box-orient: vertical;
-            white-space: normal;
-        }
-    </style>
 @endsection

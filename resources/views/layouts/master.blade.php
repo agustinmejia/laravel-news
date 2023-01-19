@@ -31,12 +31,43 @@
 
         @yield('css')
 
+        <style>
+            .title-ellipsis{
+                text-overflow:ellipsis;
+                overflow:hidden;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                white-space: normal;
+            }
+            .subtitle-ellipsis{
+                text-overflow:ellipsis;
+                overflow:hidden;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 10;
+                -webkit-box-orient: vertical;
+                white-space: normal;
+            }
+        </style>
+
         <!-- =======================================================
         * Template Name: ZenBlog - v1.3.0
         * Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/
         * Author: BootstrapMade.com
         * License: https:///bootstrapmade.com/license/
         ======================================================== -->
+
+        <!-- Google tag (gtag.js) -->
+        @if (env('GOOGLE_ANALYTICS_ID') && !env('APP_DEBUG'))
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('GOOGLE_ANALYTICS_ID') }}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', '{{ env('GOOGLE_ANALYTICS_ID') }}');
+            </script>
+        @endif
     </head>
     <body>
         
@@ -143,47 +174,28 @@
                 <div class="col-lg-4">
                     <h3 class="footer-heading">Noticias recientes</h3>
 
+                    @php
+                        $latest = App\Models\Post::where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->limit(4)->get();
+                    @endphp
+
                     <ul class="footer-links footer-blog-entry list-unstyled">
-                    <li>
-                        <a href="single-post.html" class="d-flex align-items-center">
-                        <img src="{{ asset('assets/img/post-sq-1.jpg') }}" alt="" class="img-fluid me-3">
-                        <div>
-                            <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                            <span>5 Great Startup Tips for Female Founders</span>
-                        </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="single-post.html" class="d-flex align-items-center">
-                        <img src="{{ asset('assets/img/post-sq-2.jpg') }}" alt="" class="img-fluid me-3">
-                        <div>
-                            <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                            <span>What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</span>
-                        </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="single-post.html" class="d-flex align-items-center">
-                        <img src="{{ asset('assets/img/post-sq-3.jpg') }}" alt="" class="img-fluid me-3">
-                        <div>
-                            <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                            <span>Life Insurance And Pregnancy: A Working Mom’s Guide</span>
-                        </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="single-post.html" class="d-flex align-items-center">
-                        <img src="{{ asset('assets/img/post-sq-4.jpg') }}" alt="" class="img-fluid me-3">
-                        <div>
-                            <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                            <span>How to Avoid Distraction and Stay Focused During Video Calls?</span>
-                        </div>
-                        </a>
-                    </li>
-
+                        @php
+                            $meses = array("","Ene","Feb","Mar","Abr","May","Jun","Jul","Agos","Sept","Oct","Nov","Dic");
+                        @endphp
+                        @foreach ($latest as $post)
+                            @php
+                                $publish_date = Carbon\Carbon::parse($post->publish_date);
+                            @endphp
+                            <li>
+                                <a href="{{ url('post/'.$post->slug) }}" class="d-flex align-items-center">
+                                    <img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid me-3">
+                                    <div>
+                                        <div class="post-meta d-block"><span class="date">{{ $post->category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                        <span class="title-ellipsis">{{ Str::upper($post->title) }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
 
                 </div>
