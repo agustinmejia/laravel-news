@@ -43,6 +43,10 @@ Route::get('post/{slug}', function ($slug) {
     return view('post', compact('post'));
 });
 
+Route::get('videos', function () {
+    $videos = App\Models\Video::where('status', 'publicado')->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->where('deleted_at', null)->get();
+    return view('videos', compact('videos'));
+});
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

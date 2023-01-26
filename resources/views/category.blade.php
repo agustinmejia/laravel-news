@@ -129,15 +129,28 @@
                         </div>
                     </div>
 
-                    {{-- <div class="aside-block">
-                        <h3 class="aside-title">Video</h3>
+                    <div class="aside-block">
+                        {{-- <h3 class="aside-title">Video</h3>
                         <div class="video-post">
                             <a href="https://www.youtube.com/watch?v=AiFfDjmd0jU" class="glightbox link-video">
                             <span class="bi-play-fill"></span>
                             <img src="{{ asset('assets/img/post-landscape-5.jpg') }}" alt="" class="img-fluid">
                             </a>
-                        </div>
-                    </div> --}}
+                        </div> --}}
+                        @php
+                            $video = App\Models\Customer::where('status', 1)->whereRaw('(type = "" or type is null)')->inRandomOrder()->first();
+                        @endphp
+                        @if ($video)
+                            <a href="{{ $video->web }}" target="_blank">
+                                <div class="card-advertising">
+                                    <img src="{{ asset('storage/'.str_replace('.', '-medium.', $video->banner)) }}" alt="Avatar" class="image-advertising">
+                                    <div class="overlay-advertising">
+                                        <div class="text-advertising">{{ $video->name }}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
+                    </div>
                     <!-- End Video -->
 
                     <div class="aside-block">

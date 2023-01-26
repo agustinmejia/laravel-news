@@ -32,7 +32,18 @@
                         <div class="swiper-wrapper">
                             @php
                                 $banners = App\Models\Post::where('type', 'portada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->get();
+                                $video = App\Models\Customer::where('status', 1)->where('type', 'portada')->inRandomOrder()->first();
                             @endphp
+                            @if ($video)
+                                <div class="swiper-slide">
+                                    <a href="{{ $video->web }}" class="img-bg d-flex align-items-end" style="background-image: url('{{ asset('storage/'.$video->banner) }}');">
+                                        <div class="img-bg-inner">
+                                            <h2>{{ $video->name }}</h2>
+                                            <p>{{ $video->address }}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endif
                             @forelse ($banners as $item)
                                 <div class="swiper-slide">
                                     <a href="{{ url('post/'.$item->slug) }}" class="img-bg d-flex align-items-end" style="background-image: url('{{ asset('storage/'.$item->banner) }}');">
@@ -161,6 +172,22 @@
                                                     $cont++;
                                                 @endphp
                                             @endforeach
+
+                                            @php
+                                                $video = App\Models\Customer::where('status', 1)->where('type', 'destacada')->inRandomOrder()->first();
+                                            @endphp
+                                            @if ($video)
+                                                <li>
+                                                    <a href="{{ $video->web }}" target="_blank">
+                                                        <div class="card-advertising">
+                                                            <img src="{{ asset('storage/'.str_replace('.', '-medium.', $video->banner)) }}" alt="Avatar" class="image-advertising">
+                                                            <div class="overlay-advertising">
+                                                                <div class="text-advertising">{{ $video->name }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     @endif
                                 </div>

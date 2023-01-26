@@ -100,7 +100,7 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="{{ url('') }}">Cara a Cara</a></li>
+                    <li><a href="{{ url('videos') }}">Cara a Cara</a></li>
                     <li><a href="{{ url('contact') }}">Contacto</a></li>
                     </ul>
                 </nav><!-- .navbar -->

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->string('title', 255)->nullable();
             $table->text('subtitle')->nullable();
-            $table->text('body')->nullable();
-            $table->string('slug', 255)->unique();
+            $table->string('url', 255)->unique();
             $table->string('banner')->nullable();
             $table->string('tags')->nullable();
             $table->string('status')->nullable()->default('borrador');
@@ -40,6 +39,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('videos');
     }
 }

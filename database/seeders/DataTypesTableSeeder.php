@@ -34,8 +34,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
-                'created_at' => '2021-06-02 17:55:30',
-                'updated_at' => '2022-08-14 23:31:50',
+                'created_at' => '2021-06-02 13:55:30',
+                'updated_at' => '2022-08-14 19:31:50',
             ),
             1 => 
             array (
@@ -52,8 +52,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => NULL,
-                'created_at' => '2021-06-02 17:55:30',
-                'updated_at' => '2021-06-02 17:55:30',
+                'created_at' => '2021-06-02 13:55:30',
+                'updated_at' => '2021-06-02 13:55:30',
             ),
             2 => 
             array (
@@ -70,8 +70,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
-                'created_at' => '2021-06-02 17:55:31',
-                'updated_at' => '2022-08-14 23:40:05',
+                'created_at' => '2021-06-02 13:55:31',
+                'updated_at' => '2022-08-14 19:40:05',
             ),
             3 => 
             array (
@@ -88,8 +88,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":"table_name","order_display_column":"table_name","order_direction":"asc","default_search_key":null}',
-                'created_at' => '2022-05-24 15:21:20',
-                'updated_at' => '2022-05-24 15:21:20',
+                'created_at' => '2022-05-24 11:21:20',
+                'updated_at' => '2022-05-24 11:21:20',
             ),
             4 => 
             array (
@@ -106,8 +106,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2023-01-06 19:22:46',
-                'updated_at' => '2023-01-06 19:43:33',
+                'created_at' => '2023-01-06 15:22:46',
+                'updated_at' => '2023-01-06 15:43:33',
             ),
             5 => 
             array (
@@ -124,8 +124,44 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2023-01-06 19:40:43',
-                'updated_at' => '2023-01-12 09:48:23',
+                'created_at' => '2023-01-06 15:40:43',
+                'updated_at' => '2023-01-12 05:48:23',
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'name' => 'videos',
+                'slug' => 'videos',
+                'display_name_singular' => 'Video',
+                'display_name_plural' => 'Videos',
+                'icon' => 'voyager-video',
+                'model_name' => 'App\\Models\\Video',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-01-26 11:33:58',
+                'updated_at' => '2023-01-26 16:00:07',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'customers',
+                'slug' => 'customers',
+                'display_name_singular' => 'Cliente',
+                'display_name_plural' => 'Clientes',
+                'icon' => 'voyager-people',
+                'model_name' => 'App\\Models\\Customer',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-01-26 12:03:17',
+                'updated_at' => '2023-01-26 12:07:33',
             ),
         ));
         

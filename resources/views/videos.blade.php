@@ -1,67 +1,52 @@
 @extends('layouts.master')
 
 @section('seo')
-    <title>{{ $post->title }}</title>
-    <meta content="{{ $post->subtitle }}" name="description">
-    <meta content="{{ $post->tags }}" name="keywords">
+    <title>{{ setting('site.title') }} | Cara a Cara</title>
+    <meta content="{{ setting('site.description') }}" name="description">
+    <meta content="{{ setting('site.keyboards') }}" name="keywords">
     
     @php
-        $banner = $post->banner;
+        $icon = Voyager::setting('site.logo', '../images/icon.png');
+        $meses = array("","Ene","Feb","Mar","Abr","May","Jun","Jul","Agos","Sept","Oct","Nov","Dic");
     @endphp
 
-    <meta property="og:url"           content="{{ url('post/'.$post->slug) }}" />
+    <meta property="og:url"           content="{{ url('videos') }}" />
     <meta property="og:type"          content="Blog" />
-    <meta property="og:title"         content="{{ $post->title }}" />
-    <meta property="og:description"   content="{{ $post->subtitle }}" />
-    <meta property="og:image"         content="{{ Voyager::image($banner) }}" />
+    <meta property="og:title"         content="{{ setting('site.title') }}" />
+    <meta property="og:description"   content="{{ setting('site.description') }}" />
+    <meta property="og:image"         content="{{ Voyager::image($icon) }}" />
 @endsection
 
 @section('content')
     <main id="main">
-
-        <section class="single-post-content">
+        <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9 post-content" data-aos="fade-up">
+                    <div class="col-md-8" data-aos="fade-up">
+                        <h3 class="category-title">Cara a Cara</h3>
 
-                        @php
-                            $meses = array("","Ene","Feb","Mar","Abr","May","Jun","Jul","Agos","Sept","Oct","Nov","Dic");
-                            $publish_date = Carbon\Carbon::parse($post->publish_date);
-                        @endphp
-
-                        <!-- ======= Single Post Content ======= -->
-                        <div class="single-post">
-                            <div class="post-meta"><span class="date">{{ $post->category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
-                            <h1 class="mb-5">{{ $post->title }}</h1>
-                            <p><span class="firstcharacter">{{ substr($post->subtitle, 0, 1) }}</span>{{ substr($post->subtitle, 1) }}</p>
-
-                            <div class="col-md-12 my-4">
-                                <img src="{{ Voyager::image($banner) }}" alt="{{ $post->title }}" class="img-fluid" style="width: 100% !important">
+                        @forelse ($videos as $video)
+                            @php
+                                $publish_date = Carbon\Carbon::parse($video->publish_date);
+                            @endphp
+                            <div class="d-md-flex post-entry-2 half">
+                                <div class="video-post" style="padding: 20px 30px">
+                                    <a href="{{ $video->url }}" class="glightbox link-video">
+                                        <span class="bi-play-fill"></span>
+                                        <img src="{{ Voyager::image(str_replace(".", "-cropped.", $video->banner)) }}" alt="" class="img-fluid">
+                                    </a>
+                                </div>
+                                <div>
+                                    <div class="post-meta"><span class="date">{{ $video->category ? $video->category->name : 'Sin categoría' }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
+                                    <h3>{{ $video->title }}</h3>
+                                    <p class="subtitle-ellipsis">{{ $video->subtitle }}</p>
+                                </div>
                             </div>
+                        @empty
                             
-                            {!! $post->body !!}
-
-                            <br><br>
-                            <table align="right">
-                                <tr>
-                                    <td>
-                                        <a href="https://wa.me/?text={{ url('post/'.$post->slug) }}" target="_blank" class="btn btn-success btn-sm" style="height: 28px;"><i class="bi-whatsapp"></i> WhastApp</a>
-                                    </td>
-                                    <td>
-                                        <div class="fb-like" data-href="{{ url('post/'.$post->slug) }}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <br><br>
-
-                            <div class="comments">
-                                <br><br>
-                                <div class="fb-comments" data-href="{{ url('post/'.$post->slug) }}" data-width="" data-numposts="5"></div>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <!-- ======= Sidebar ======= -->
                         <div class="aside-block">
 
@@ -158,19 +143,20 @@
                         <!-- End Categories -->
 
                         {{-- <div class="aside-block">
-                            <h3 class="aside-title">Tags</h3>
+                            <h3 class="aside-title">Etiquetas</h3>
                             <ul class="aside-tags list-unstyled">
-                                <li><a href="category.html">Business</a></li>
-                                <li><a href="category.html">Culture</a></li>
-                                <li><a href="category.html">Sport</a></li>
-                                <li><a href="category.html">Food</a></li>
-                                <li><a href="category.html">Politics</a></li>
-                                <li><a href="category.html">Celebrity</a></li>
-                                <li><a href="category.html">Startups</a></li>
-                                <li><a href="category.html">Travel</a></li>
+                                <li><a href="{{ url('category/deportes') }}">Negocios</a></li>
+                                <li><a href="{{ url('category/deportes') }}">Cultura</a></li>
+                                <li><a href="{{ url('category/deportes') }}">Deportes</a></li>
+                                <li><a href="{{ url('category/deportes') }}">Cocina</a></li>
+                                <li><a href="{{ url('category/deportes') }}">Política</a></li>
+                                <li><a href="{{ url('category/deportes') }}">Farandula</a></li>
+                                <li><a href="{{ url('category/deportes') }}">Tecnología</a></li>
+                                <li><a href="{{ url('category/deportes') }}">Viajes</a></li>
                             </ul>
                         </div> --}}
                         <!-- End Tags -->
+
                     </div>
                 </div>
             </div>

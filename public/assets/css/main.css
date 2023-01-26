@@ -487,6 +487,48 @@ section {
   margin-bottom: 10px;
 }
 
+/*--------------------------------------------------------------
+# Publicity
+--------------------------------------------------------------*/
+.card-advertising {
+  position: relative;
+}
+
+.image-advertising {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay-advertising {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.card-advertising:hover .overlay-advertising {
+  opacity: 1;
+}
+
+.text-advertising {
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .custom-border {
     border: none !important;
