@@ -32,14 +32,14 @@
                         <div class="swiper-wrapper">
                             @php
                                 $banners = App\Models\Post::where('type', 'portada')->where('status', 'publicado')->where('deleted_at', NULL)->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->get();
-                                $video = App\Models\Customer::where('status', 1)->where('type', 'portada')->inRandomOrder()->first();
+                                $customer = App\Models\Customer::where('status', 1)->where('type', 'portada')->inRandomOrder()->first();
                             @endphp
-                            @if ($video)
+                            @if ($customer)
                                 <div class="swiper-slide">
-                                    <a href="{{ $video->web }}" class="img-bg d-flex align-items-end" style="background-image: url('{{ asset('storage/'.$video->banner) }}');">
+                                    <a href="{{ $customer->web }}" class="img-bg d-flex align-items-end" style="background-image: url('{{ asset('storage/'.$customer->banner) }}');">
                                         <div class="img-bg-inner">
-                                            <h2>{{ $video->name }}</h2>
-                                            <p>{{ $video->address }}</p>
+                                            <h2>{{ $customer->name }}</h2>
+                                            <p>{{ $customer->address }}</p>
                                         </div>
                                     </a>
                                 </div>
@@ -149,7 +149,6 @@
 
                             <!-- Trending Section -->
                             <div class="col-lg-4">
-
                                 <div class="trending">
                                     <h3>Tendencias</h3>
                                     @if ($trendings->count() > 7)
@@ -174,15 +173,15 @@
                                             @endforeach
 
                                             @php
-                                                $video = App\Models\Customer::where('status', 1)->where('type', 'destacada')->inRandomOrder()->first();
+                                                $customer = App\Models\Customer::where('status', 1)->where('type', 'destacada')->inRandomOrder()->first();
                                             @endphp
-                                            @if ($video)
+                                            @if ($customer)
                                                 <li>
-                                                    <a href="{{ $video->web }}" target="_blank">
+                                                    <a href="{{ $customer->web }}" target="_blank" style="padding: 0px">
                                                         <div class="card-advertising">
-                                                            <img src="{{ asset('storage/'.str_replace('.', '-medium.', $video->banner)) }}" alt="Avatar" class="image-advertising">
+                                                            <img src="{{ asset('storage/'.str_replace('.', '-medium.', $customer->banner)) }}" alt="Avatar" class="image-advertising">
                                                             <div class="overlay-advertising">
-                                                                <div class="text-advertising">{{ $video->name }}</div>
+                                                                <div class="text-advertising">Click para ver más</div>
                                                             </div>
                                                         </div>
                                                     </a>
@@ -199,6 +198,27 @@
                 </div> <!-- End .row -->
             </div>
         </section> <!-- End Post Grid Section -->
+
+
+        @php
+            $customer = App\Models\Customer::where('status', 1)->where('type', 'banner')->inRandomOrder()->first();
+        @endphp
+        @if ($customer)
+        <section style="padding: 50px">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="{{ $customer->web }}" target="_blank">
+                        <div class="card-advertising">
+                            <img src="{{ asset('storage/'.str_replace('.', '-medium.', $customer->banner)) }}" alt="Avatar" class="image-advertising">
+                            <div class="overlay-advertising">
+                                <div class="text-advertising" style="">Click para ver más</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        @endif
 
         @php
             $categories = App\Models\Category::whereHas('posts', function($q){
@@ -325,5 +345,27 @@
                 $cont++;
             @endphp
         @endforeach
+
+        @php
+            $customers = App\Models\Customer::where('status', 1)->inRandomOrder()->get();
+        @endphp
+
+        <!-- ======= Clients Section ======= -->
+        @if ($customers->count() > 5)
+            <section id="clients" class="clients mt-5">
+                <div class="container" data-aos="zoom-out">
+                    <div class="clients-slider swiper">
+                        <div class="swiper-wrapper align-items-center">
+                            @foreach ($customers as $customer)
+                                <div class="swiper-slide">
+                                    <a href="{{ $customer->web }}" target="_blank"><img src="{{ asset('storage/'.str_replace('.', '-cropped.', $customer->logo)) }}" class="img-fluid" alt="{{ $customer->name }}"></a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
+        <!-- End Clients Section -->
     </main>
 @endsection

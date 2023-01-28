@@ -1169,7 +1169,7 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => '{"validation":{"rule":"required"},"display":{"width":6}}',
-                'order' => 2,
+                'order' => 4,
             ),
             72 => 
             array (
@@ -1185,7 +1185,7 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => '{"display":{"width":6}}',
-                'order' => 3,
+                'order' => 5,
             ),
             73 => 
             array (
@@ -1201,7 +1201,7 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => '{"display":{"width":6}}',
-                'order' => 4,
+                'order' => 6,
             ),
             74 => 
             array (
@@ -1217,7 +1217,7 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => '{"resize":{"width":"1000","height":null},"quality":"70%","upsize":true,"thumbnails":[{"name":"medium","scale":"50%"},{"name":"small","scale":"25%"},{"name":"banner","crop":{"width":"900","height":"571"}},{"name":"cropped","crop":{"width":"300","height":"250"}}],"display":{"width":6}}',
-                'order' => 5,
+                'order' => 3,
             ),
             75 => 
             array (
@@ -1232,8 +1232,8 @@ class DataRowsTableSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => '{"display":{"width":6}}',
-                'order' => 6,
+                'details' => '{"validation":{"rule":"required"},"display":{"width":6}}',
+                'order' => 7,
             ),
             76 => 
             array (
@@ -1248,8 +1248,8 @@ class DataRowsTableSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => '{"options":{"":"normal","destacada":"destacada","portada":"portada"},"display":{"width":6}}',
-                'order' => 7,
+                'details' => '{"options":{"":"normal","destacada":"destacada","portada":"portada","banner":"banner"},"display":{"width":6}}',
+                'order' => 8,
             ),
             77 => 
             array (
@@ -1265,7 +1265,7 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 0,
                 'delete' => 0,
                 'details' => '{}',
-                'order' => 8,
+                'order' => 9,
             ),
             78 => 
             array (
@@ -1281,7 +1281,7 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 1,
                 'delete' => 1,
                 'details' => '{"on":"Activo","off":"Inactivo","checked":true,"display":{"width":6}}',
-                'order' => 9,
+                'order' => 10,
             ),
             79 => 
             array (
@@ -1297,7 +1297,7 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 0,
                 'delete' => 0,
                 'details' => '{}',
-                'order' => 10,
+                'order' => 11,
             ),
             80 => 
             array (
@@ -1313,7 +1313,7 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 0,
                 'delete' => 0,
                 'details' => '{}',
-                'order' => 11,
+                'order' => 12,
             ),
             81 => 
             array (
@@ -1329,7 +1329,23 @@ class DataRowsTableSeeder extends Seeder
                 'add' => 0,
                 'delete' => 0,
                 'details' => '{}',
-                'order' => 12,
+                'order' => 13,
+            ),
+            82 => 
+            array (
+                'id' => 83,
+                'data_type_id' => 8,
+                'field' => 'logo',
+                'type' => 'image',
+                'display_name' => 'Logo',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"resize":{"width":"512","height":null},"quality":"70%","upsize":true,"thumbnails":[{"name":"cropped","crop":{"width":"300","height":"200"}}],"display":{"width":6}}',
+                'order' => 2,
             ),
         ));
         

@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->string('name', 255)->nullable();
             $table->string('phone', 255)->nullable();
             $table->string('address', 255)->nullable();
+            $table->string('logo')->nullable();
             $table->string('banner')->nullable();
             $table->string('web', 255)->nullable();
             $table->string('type')->nullable();

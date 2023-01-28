@@ -145,7 +145,7 @@
                                 <div class="card-advertising">
                                     <img src="{{ asset('storage/'.str_replace('.', '-medium.', $video->banner)) }}" alt="Avatar" class="image-advertising">
                                     <div class="overlay-advertising">
-                                        <div class="text-advertising">{{ $video->name }}</div>
+                                        <div class="text-advertising">Click para ver más</div>
                                     </div>
                                 </div>
                             </a>
