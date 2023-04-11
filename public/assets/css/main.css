@@ -494,10 +494,18 @@ section {
   position: relative;
 }
 
-.image-advertising {
+.image-advertising img{
   display: block;
   width: 100%;
   height: auto;
+}
+
+.card-advertising .image-advertising img {
+  transition: 0.4s;
+}
+
+.card-advertising .image-advertising:hover img{
+  transform: scale(1.1);
 }
 
 .overlay-advertising {

@@ -179,10 +179,12 @@
                                                 <li>
                                                     <a href="{{ $customer->web }}" target="_blank" style="padding: 0px">
                                                         <div class="card-advertising">
-                                                            <img src="{{ asset('storage/'.str_replace('.', '-medium.', $customer->banner)) }}" alt="Avatar" class="image-advertising">
-                                                            <div class="overlay-advertising">
-                                                                <div class="text-advertising">Click para ver más</div>
+                                                            <div class="image-advertising">
+                                                                <img src="{{ asset('storage/'.str_replace('.', '-medium.', $customer->banner)) }}" alt="Avatar">
                                                             </div>
+                                                            {{-- <div class="overlay-advertising">
+                                                                <div class="text-advertising">Click para ver más</div>
+                                                            </div> --}}
                                                         </div>
                                                     </a>
                                                 </li>
@@ -201,18 +203,21 @@
 
 
         @php
-            $customer = App\Models\Customer::where('status', 1)->where('type', 'banner')->inRandomOrder()->first();
+            $customer_carousel = App\Models\Customer::where('status', 1)->where('type', 'banner')->inRandomOrder()->get();
         @endphp
-        @if ($customer)
-        <section style="padding: 50px">
+        @if ($customer_carousel->count())
+        <section class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <a href="{{ $customer->web }}" target="_blank">
+                <div class="col-md-12" style="height: 300px">
+                    <a href="{{ $customer_carousel[0]->web }}" target="_blank">
                         <div class="card-advertising">
-                            <img src="{{ asset('storage/'.str_replace('.', '-medium.', $customer->banner)) }}" alt="Avatar" class="image-advertising">
-                            <div class="overlay-advertising">
-                                <div class="text-advertising" style="">Click para ver más</div>
+                            <div class="image-advertising">
+                                <img id="img-carousel" src="{{ asset('storage/'.$customer_carousel[0]->banner) }}" alt="Advertising">
                             </div>
+                                {{-- <img src="{{ asset('storage/'.$customer->banner) }}" alt="Avatar" style="width: 100%"> --}}
+                            {{-- <div class="overlay-advertising">
+                                <div class="text-advertising" style="">Click para ver más</div>
+                            </div> --}}
                         </div>
                     </a>
                 </div>
@@ -357,9 +362,11 @@
                     <div class="clients-slider swiper">
                         <div class="swiper-wrapper align-items-center">
                             @foreach ($customers as $customer)
+                                @if($customer->logo)
                                 <div class="swiper-slide">
                                     <a href="{{ $customer->web }}" target="_blank"><img src="{{ asset('storage/'.str_replace('.', '-cropped.', $customer->logo)) }}" class="img-fluid" alt="{{ $customer->name }}"></a>
                                 </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -368,4 +375,18 @@
         @endif
         <!-- End Clients Section -->
     </main>
+@endsection
+
+@section('javascript')
+    <script>
+        const customer_carousel = @json($customer_carousel);
+        var i = 1;
+        setInterval(() => {
+            document.getElementById("img-carousel").src = "{{ asset('storage') }}/"+customer_carousel[i].banner;
+            i++;
+            if(i >= customer_carousel.length){
+                i = 0;
+            }
+        }, 10000);
+    </script>
 @endsection

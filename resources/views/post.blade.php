@@ -132,15 +132,17 @@
                                 </a>
                             </div> --}}
                             @php
-                                $video = App\Models\Customer::where('status', 1)->whereRaw('(type = "" or type is null)')->inRandomOrder()->first();
+                                $customer = App\Models\Customer::where('status', 1)->whereRaw('(type = "" or type is null)')->inRandomOrder()->first();
                             @endphp
-                            @if ($video)
-                                <a href="{{ $video->web }}" target="_blank">
+                            @if ($customer)
+                                <a href="{{ $customer->web }}" target="_blank">
                                     <div class="card-advertising">
-                                        <img src="{{ asset('storage/'.str_replace('.', '-medium.', $video->banner)) }}" alt="Avatar" class="image-advertising">
-                                        <div class="overlay-advertising">
-                                            <div class="text-advertising">Click para ver más</div>
+                                        <div class="image-advertising">
+                                            <img src="{{ asset('storage/'.str_replace('.', '-medium.', $customer->banner)) }}" alt="Avatar">
                                         </div>
+                                        {{-- <div class="overlay-advertising">
+                                            <div class="text-advertising">Click para ver más</div>
+                                        </div> --}}
                                     </div>
                                 </a>
                             @endif

@@ -34,8 +34,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
-                'created_at' => '2021-06-02 13:55:30',
-                'updated_at' => '2022-08-14 19:31:50',
+                'created_at' => '2021-06-02 09:55:30',
+                'updated_at' => '2022-08-14 15:31:50',
             ),
             1 => 
             array (
@@ -52,8 +52,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => NULL,
-                'created_at' => '2021-06-02 13:55:30',
-                'updated_at' => '2021-06-02 13:55:30',
+                'created_at' => '2021-06-02 09:55:30',
+                'updated_at' => '2021-06-02 09:55:30',
             ),
             2 => 
             array (
@@ -70,8 +70,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
-                'created_at' => '2021-06-02 13:55:31',
-                'updated_at' => '2022-08-14 19:40:05',
+                'created_at' => '2021-06-02 09:55:31',
+                'updated_at' => '2022-08-14 15:40:05',
             ),
             3 => 
             array (
@@ -88,8 +88,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":"table_name","order_display_column":"table_name","order_direction":"asc","default_search_key":null}',
-                'created_at' => '2022-05-24 11:21:20',
-                'updated_at' => '2022-05-24 11:21:20',
+                'created_at' => '2022-05-24 07:21:20',
+                'updated_at' => '2022-05-24 07:21:20',
             ),
             4 => 
             array (
@@ -106,8 +106,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2023-01-06 15:22:46',
-                'updated_at' => '2023-01-06 15:43:33',
+                'created_at' => '2023-01-06 11:22:46',
+                'updated_at' => '2023-01-06 11:43:33',
             ),
             5 => 
             array (
@@ -124,8 +124,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2023-01-06 15:40:43',
-                'updated_at' => '2023-01-12 05:48:23',
+                'created_at' => '2023-01-06 11:40:43',
+                'updated_at' => '2023-04-11 13:54:16',
             ),
             6 => 
             array (
@@ -142,8 +142,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2023-01-26 11:33:58',
-                'updated_at' => '2023-01-26 16:00:07',
+                'created_at' => '2023-01-26 07:33:58',
+                'updated_at' => '2023-01-28 12:12:49',
             ),
             7 => 
             array (
@@ -160,8 +160,8 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => 1,
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2023-01-26 12:03:17',
-                'updated_at' => '2023-01-28 00:36:36',
+                'created_at' => '2023-01-26 08:03:17',
+                'updated_at' => '2023-04-11 13:19:44',
             ),
         ));
         
