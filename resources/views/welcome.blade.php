@@ -208,7 +208,7 @@
         @if ($customer_carousel->count())
         <section class="container">
             <div class="row">
-                <div class="col-md-12" style="height: 300px">
+                <div class="col-md-12">
                     <a href="{{ $customer_carousel[0]->web }}" target="_blank">
                         <div class="card-advertising">
                             <div class="image-advertising">
@@ -350,6 +350,25 @@
                 $cont++;
             @endphp
         @endforeach
+
+        @php
+            $customer_footer = App\Models\Customer::where('status', 1)->where('type', 'banner_footer')->inRandomOrder()->first();
+        @endphp
+        @if ($customer_footer)
+        <section class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ $customer_footer->web }}" target="_blank">
+                        <div class="card-advertising">
+                            <div class="image-advertising">
+                                <img src="{{ asset('storage/'.$customer_footer->banner) }}" alt="Advertising">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        @endif
 
         @php
             $customers = App\Models\Customer::where('status', 1)->inRandomOrder()->get();

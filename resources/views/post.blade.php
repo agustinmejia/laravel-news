@@ -60,6 +60,25 @@
                                 <div class="fb-comments" data-href="{{ url('post/'.$post->slug) }}" data-width="" data-numposts="5"></div>
                             </div>
                         </div>
+
+                        @php
+                            $customer_carousel = App\Models\Customer::where('status', 1)->where('type', 'banner')->inRandomOrder()->first();
+                        @endphp
+                        @if ($customer_carousel)
+                        <section class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="{{ $customer_carousel->web }}" target="_blank">
+                                        <div class="card-advertising">
+                                            <div class="image-advertising">
+                                                <img id="img-carousel" src="{{ asset('storage/'.$customer_carousel->banner) }}" alt="Advertising">
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+                        @endif
                     </div>
                     <div class="col-md-3">
                         <!-- ======= Sidebar ======= -->
