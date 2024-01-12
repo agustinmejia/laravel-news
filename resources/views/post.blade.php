@@ -47,20 +47,10 @@
                                     <td>
                                         <a href="https://wa.me/?text={{ url('post/'.$post->slug) }}" target="_blank" class="btn btn-success btn-sm" style="height: 28px;"><i class="bi-whatsapp"></i> WhastApp</a>
                                     </td>
-                                    <td>
-                                        <div class="fb-like" data-href="{{ url('post/'.$post->slug) }}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
-                                    </td>
                                 </tr>
                             </table>
-
                             <br><br>
-
-                            <div class="comments">
-                                <br><br>
-                                <div class="fb-comments" data-href="{{ url('post/'.$post->slug) }}" data-width="" data-numposts="5"></div>
-                            </div>
                         </div>
-
                         @php
                             $customer_carousel = App\Models\Customer::where('status', 1)->where('type', 'banner')->inRandomOrder()->first();
                         @endphp

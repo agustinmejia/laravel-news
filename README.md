@@ -7,9 +7,11 @@
 sudo apt install php7.4-mbstring php7.4-intl php7.4-dom php7.4-gd php7.4-xml php7.4-mbstring php7.4-zip php7.4-mysql
 composer install
 cp .env.example .env
-php artisan template:install
+php artisan news:install
 chmod -R 777 storage bootstrap/cache
 ```
+
+Nota: Eliminar vendor\tcg\voyager\resources\views\posts\edit-add-alt.blade.php (vista por defecto)
 
 ## Colaboradores
 

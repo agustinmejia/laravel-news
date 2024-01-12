@@ -16,7 +16,36 @@
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        {{-- <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> --}}
+
+        {{-- Fuente --}}
+        @switch(setting('site.font'))
+            @case('Roboto')
+                <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300&display=swap" rel="stylesheet">
+                <style>
+                    :root {
+                        --font-default: "Open Sans", sans-serif;
+                    }
+                </style>
+                @break
+            @case('Montserrat')
+                <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300&display=swap" rel="stylesheet">
+                <style>
+                    :root {
+                        --font-default: "Montserrat", sans-serif;
+                    }
+                </style>
+                @break
+            @case('Lora')
+            <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300&display=swap" rel="stylesheet">
+                <style>
+                    :root {
+                        --font-default: "Lora", serif;;
+                    }
+                </style>
+                @break
+            @default
+                
+        @endswitch
 
         <!-- Vendor CSS Files -->
         <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -69,11 +98,7 @@
             </script>
         @endif
     </head>
-    <body>
-        
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v15.0&appId=2989546164659083&autoLogAppEvents=1" nonce="gLusA6cu"></script>
-        
+    <body>    
         <!-- ======= Header ======= -->
         <header id="header" class="header d-flex align-items-center fixed-top">
             <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -100,30 +125,28 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="{{ url('videos') }}">Cara a Cara</a></li>
+                    {{-- <li><a href="{{ url('videos') }}">Cara a Cara</a></li> --}}
                     <li><a href="{{ url('contact') }}">Contacto</a></li>
                     </ul>
                 </nav><!-- .navbar -->
 
                 <div class="position-relative">
                     @if (setting('social.facebook'))
-                        <a href="{{ setting('social.facebook') }}" target="_blank" class="mx-2"><span class="bi-facebook"></span></a>    
+                        <a class="nav-social" href="{{ setting('social.facebook') }}" target="_blank" class="mx-2"><span class="bi-facebook"></span></a>    
                     @endif
                     @if (setting('social.twitter'))
-                        <a href="{{ setting('social.twitter') }}" target="_blank" class="mx-2"><span class="bi-twitter"></span></a>
+                        <a class="nav-social" href="{{ setting('social.twitter') }}" target="_blank" class="mx-2"><span class="bi-twitter"></span></a>
                     @endif
                     @if (setting('social.instagram'))
-                        <a href="{{ setting('social.instagram') }}" target="_blank" class="mx-2"><span class="bi-instagram"></span></a>
+                        <a class="nav-social" href="{{ setting('social.instagram') }}" target="_blank" class="mx-2"><span class="bi-instagram"></span></a>
                     @endif
                     @if (setting('social.youtube'))
-                        <a href="{{ setting('social.youtube') }}" target="_blank" class="mx-2"><span class="bi-youtube"></span></a>
+                        <a class="nav-social" href="{{ setting('social.youtube') }}" target="_blank" class="mx-2"><span class="bi-youtube"></span></a>
                     @endif
                     @if (setting('social.whatsapp'))
-                        <a href="https://wa.me/{{ setting('social.whatsapp') ?? '59175199157' }}?text=Vi su página web" target="_blank"class="mx-2"><span class="bi-whatsapp"></span></a>
+                        <a class="nav-social" href="https://wa.me/{{ setting('social.whatsapp') ?? '59175199157' }}?text=Vi su página web" target="_blank"class="mx-2"><span class="bi-whatsapp"></span></a>
                     @endif
-
                     <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
-                    <i class="bi bi-list mobile-nav-toggle"></i>
 
                     <!-- ======= Search Form ======= -->
                     <div class="search-form-wrap js-search-form-wrap">
@@ -132,7 +155,10 @@
                             <input type="text" placeholder="Buscar" class="form-control">
                             <button class="btn js-search-close"><span class="bi-x"></span></button>
                         </form>
-                    </div><!-- End Search Form -->
+                    </div>
+                    <!-- End Search Form -->
+
+                    <i class="bi bi-list mobile-nav-toggle"></i>
 
                 </div>
 
@@ -251,6 +277,17 @@
         </footer>
 
         <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        @if (setting('site.loader'))
+            <div id="preloader-container">
+                <div id="preloader-alt">
+                    <img src="{{ asset('storage/'.setting('site.loader')) }}" width="100px" alt="{{ setting('site.title') }}">
+                </div>
+            </div>
+        @else
+            <div id="preloader-container">
+                <div id="preloader"></div>
+            </div>
+        @endif
 
         <!-- Vendor JS Files -->
         <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

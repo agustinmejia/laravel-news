@@ -24,7 +24,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 1,
                 'key' => 'site.title',
                 'display_name' => 'Site Title',
-                'value' => 'DelfinTV',
+                'value' => 'LaravelNews',
                 'details' => '',
                 'type' => 'text',
                 'order' => 1,
@@ -35,7 +35,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 2,
                 'key' => 'site.description',
                 'display_name' => 'Site Description',
-                'value' => 'Una empresa creada por una familia de comunicadores desde 2015, iniciamos nuestros primeros pasos en las redes sociales manejamos la producción y difusión de contenidos, con responsabilidad y calidad.',
+                'value' => 'Blog de noticias',
                 'details' => '',
                 'type' => 'text',
                 'order' => 2,
@@ -49,7 +49,7 @@ class SettingsTableSeeder extends Seeder
                 'value' => '',
                 'details' => '',
                 'type' => 'image',
-                'order' => 4,
+                'order' => 6,
                 'group' => 'Site',
             ),
             3 => 
@@ -60,7 +60,7 @@ class SettingsTableSeeder extends Seeder
                 'value' => NULL,
                 'details' => '',
                 'type' => 'text',
-                'order' => 17,
+                'order' => 20,
                 'group' => 'Site',
             ),
             4 => 
@@ -90,7 +90,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 7,
                 'key' => 'admin.description',
                 'display_name' => 'Admin Description',
-                'value' => 'Sistema de administración de noticias',
+                'value' => 'Blog de noticias',
                 'details' => '',
                 'type' => 'text',
                 'order' => 1,
@@ -211,14 +211,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 19,
                 'key' => 'acerca-de.description',
                 'display_name' => 'Descripción',
-                'value' => 'Somos una empresa creada por una familia de comunicadores desde 2015, iniciamos nuestros primeros pasos en las redes sociales manejamos la producción y difusión de contenidos, con responsabilidad y calidad.
-Somos “Delfín” por qué nos identificamos por ser serviciales y ser un espejo, reflejamos todas las realidades, y en este portal abordamos las distintas perspectivas.
-Somos emprendedores por naturaleza, trabajamos en medios de comunicación por años, hoy iniciamos nuevos desafíos a través de este medio de comunicación tenemos el potencial de proponer agenda, generar conversación e incidir en la dinámica general de la sociedad. 
-Creamos, producimos y emitimos contenidos que contribuyan a construir una huella cultural positiva para el departamento del Beni, estamos en una región oriental amazónica, nos encontramos en Bolivia para el mundo, departamento del Beni Capital Trinidad.
-
-Consideramos la información como un bien público al servicio de la sociedad y estamos convencidos de que es posible ser exitosos haciendo el mejor periodismo, responsable y coherente, tras la razón y la verdad.
-Sabemos que el valor del entretenimiento radica en la emoción como cohesionador social. 
-En consecuencia, presentamos temas que interesan, divierten y emocionan, y cuando es necesario o pertinente, incluimos puntos de análisis y reflexión.',
+                'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 'details' => NULL,
                 'type' => 'text_area',
                 'order' => 13,
@@ -243,7 +236,7 @@ En consecuencia, presentamos temas que interesan, divierten y emocionan, y cuand
                 'value' => NULL,
                 'details' => NULL,
                 'type' => 'text',
-                'order' => 15,
+                'order' => 16,
                 'group' => 'Site',
             ),
             20 => 
@@ -254,7 +247,7 @@ En consecuencia, presentamos temas que interesan, divierten y emocionan, y cuand
                 'value' => NULL,
                 'details' => NULL,
                 'type' => 'text',
-                'order' => 16,
+                'order' => 17,
                 'group' => 'Site',
             ),
             21 => 
@@ -265,7 +258,7 @@ En consecuencia, presentamos temas que interesan, divierten y emocionan, y cuand
                 'value' => '',
                 'details' => NULL,
                 'type' => 'image',
-                'order' => 6,
+                'order' => 4,
                 'group' => 'Site',
             ),
             22 => 
@@ -273,7 +266,7 @@ En consecuencia, presentamos temas que interesan, divierten y emocionan, y cuand
                 'id' => 24,
                 'key' => 'streaming.iframe',
                 'display_name' => 'Código de inserción',
-                'value' => '<iframe width="100%" src="https://cloudvideo.servers10.com:2020/VideoPlayer/8226?autoplay=1" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;" scrolling="no" frameborder="0" allow="autoplay" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>',
+                'value' => NULL,
                 'details' => NULL,
                 'type' => 'text_area',
                 'order' => 19,
@@ -284,11 +277,22 @@ En consecuencia, presentamos temas que interesan, divierten y emocionan, y cuand
                 'id' => 25,
                 'key' => 'streaming.status',
                 'display_name' => 'Estado',
-                'value' => '1',
+                'value' => '0',
                 'details' => NULL,
                 'type' => 'checkbox',
                 'order' => 18,
                 'group' => 'Streaming',
+            ),
+            24 => 
+            array (
+                'id' => 26,
+                'key' => 'site.loader',
+                'display_name' => 'Site Loader',
+                'value' => '',
+                'details' => NULL,
+                'type' => 'image',
+                'order' => 15,
+                'group' => 'Site',
             ),
         ));
         

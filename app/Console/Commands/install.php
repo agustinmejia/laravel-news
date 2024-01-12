@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use File;
 use TCG\Voyager\VoyagerServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class install extends Command
 {
@@ -13,14 +13,14 @@ class install extends Command
      *
      * @var string
      */
-    protected $signature = 'template:install';
+    protected $signature = 'news:install {--r|reset}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install Laravel template';
+    protected $description = 'Install Laravel news';
 
     /**
      * Create a new command instance.
@@ -39,11 +39,28 @@ class install extends Command
      */
     public function handle()
     {
-        $this->call('key:generate');
-        $this->call('migrate:fresh');
-        $this->call('db:seed');
-        $this->call('storage:link');
-        $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => ['config', 'voyager_avatar']]);
-        $this->info('Gracias por instalar LaravelTemplate');
+        $connection = mysqli_connect(env('DB_HOST'), env('DB_USERNAME'), env('DB_PASSWORD'));
+        $database = $connection->query("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '".env('DB_DATABASE')."'");
+        if(!$database->num_rows){
+            $connection->query("CREATE DATABASE ".env('DB_DATABASE'));
+            $this->info("Base de datos creada");
+        }else{
+            $empty_database = false;
+            try {
+                DB::table('users')->first();
+            } catch (\Throwable $th) {
+                $empty_database = true;
+            }
+            if($empty_database  || $this->option('reset')){
+                $this->call('key:generate');
+                $this->call('migrate:fresh');
+                $this->call('db:seed');
+                $this->call('storage:link');
+                $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => ['config', 'voyager_avatar']]);
+                $this->info('Gracias por instalar LaravelNews');
+            }else{
+                $this->error('Ya se encuentra instalado');
+            }
+        }
     }
 }

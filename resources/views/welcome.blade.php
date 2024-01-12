@@ -148,10 +148,10 @@
                             @endif
 
                             <!-- Trending Section -->
-                            <div class="col-lg-4">
-                                <div class="trending">
-                                    <h3>Tendencias</h3>
-                                    @if ($trendings->count() > 7)
+                            @if ($trendings->count() > 7)
+                                <div class="col-lg-4">
+                                    <div class="trending">
+                                        <h3>Tendencias</h3>
                                         <ul class="trending-post">
                                             @php
                                                 $cont = 1;
@@ -171,7 +171,6 @@
                                                     $cont++;
                                                 @endphp
                                             @endforeach
-
                                             @php
                                                 $customer = App\Models\Customer::where('status', 1)->where('type', 'destacada')->inRandomOrder()->first();
                                             @endphp
@@ -190,10 +189,10 @@
                                                 </li>
                                             @endif
                                         </ul>
-                                    @endif
+                                    </div>
                                 </div>
-
-                            </div> <!-- End Trending Section -->
+                                <!-- End Trending Section -->
+                            @endif
                         </div>
                     </div>
 
@@ -399,13 +398,15 @@
 @section('javascript')
     <script>
         const customer_carousel = @json($customer_carousel);
-        var i = 1;
-        setInterval(() => {
-            document.getElementById("img-carousel").src = "{{ asset('storage') }}/"+customer_carousel[i].banner;
-            i++;
-            if(i >= customer_carousel.length){
-                i = 0;
-            }
-        }, 10000);
+        if (customer_carousel.length) {
+            var i = 1;
+            setInterval(() => {
+                document.getElementById("img-carousel").src = "{{ asset('storage') }}/"+customer_carousel[i].banner;
+                i++;
+                if(i >= customer_carousel.length){
+                    i = 0;
+                }
+            }, 10000);   
+        }
     </script>
 @endsection

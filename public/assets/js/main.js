@@ -7,6 +7,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
+    /**
+   * Preloader
+   */
+    const preloader = document.querySelector('#preloader-container');
+    if (preloader) {
+      window.addEventListener('load', () => {
+        preloader.remove();
+      });
+    }
+
   /**
    * Sticky header on scroll
    */
