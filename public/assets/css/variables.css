@@ -32,13 +32,13 @@
   --color-links-hover: #15171a;
 
   /* Primay colors */
-  --color-primary: #212529;
+  /* --color-primary: #212529;
   --color-primary-light: #26282c;
-  --color-primary-dark: #0b0c0e;
+  --color-primary-dark: #0b0c0e; */
 
-  --color-primary-rgb: 33, 37, 41;
+  /* --color-primary-rgb: 33, 37, 41;
   --color-primary-light-rgb: 38, 40, 44;
-  --color-primary-dark-rgb: 11, 12, 14;
+  --color-primary-dark-rgb: 11, 12, 14; */
 
   /* Secondary colors */
   --color-secondary: #596d80;

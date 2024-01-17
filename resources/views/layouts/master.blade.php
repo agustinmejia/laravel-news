@@ -18,34 +18,24 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         {{-- Fuente --}}
-        @switch(setting('site.font'))
-            @case('Roboto')
-                <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300&display=swap" rel="stylesheet">
-                <style>
-                    :root {
-                        --font-default: "Open Sans", sans-serif;
-                    }
-                </style>
-                @break
-            @case('Montserrat')
-                <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300&display=swap" rel="stylesheet">
-                <style>
-                    :root {
-                        --font-default: "Montserrat", sans-serif;
-                    }
-                </style>
-                @break
-            @case('Lora')
-            <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300&display=swap" rel="stylesheet">
-                <style>
-                    :root {
-                        --font-default: "Lora", serif;;
-                    }
-                </style>
-                @break
-            @default
-                
-        @endswitch
+        @include('layouts.fonts')
+
+        {{-- Colors --}}
+        @if(setting('site.primary-color') && setting('site.primary-color-rgb'))
+            <style>
+                :root{
+                    --color-primary: {{ setting('site.primary-color') }};
+                    --color-primary-rgb: {{ setting('site.primary-color-rgb') }};
+                }
+            </style>
+        @else
+            <style>
+                :root{
+                    --color-primary: #212529;
+                    --color-primary-rgb: 33, 37, 41;
+                }
+            </style>
+        @endif
 
         <!-- Vendor CSS Files -->
         <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">

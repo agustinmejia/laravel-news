@@ -54,17 +54,6 @@ class SettingsTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 4,
-                'key' => 'site.google_analytics_tracking_id',
-                'display_name' => 'Google Analytics Tracking ID',
-                'value' => NULL,
-                'details' => '',
-                'type' => 'text',
-                'order' => 20,
-                'group' => 'Site',
-            ),
-            4 => 
-            array (
                 'id' => 5,
                 'key' => 'admin.bg_image',
                 'display_name' => 'Admin Background Image',
@@ -74,7 +63,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 4,
                 'group' => 'Admin',
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 6,
                 'key' => 'admin.title',
@@ -85,7 +74,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 1,
                 'group' => 'Admin',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 7,
                 'key' => 'admin.description',
@@ -96,7 +85,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 1,
                 'group' => 'Admin',
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 8,
                 'key' => 'admin.loader',
@@ -107,7 +96,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 2,
                 'group' => 'Admin',
             ),
-            8 => 
+            7 => 
             array (
                 'id' => 9,
                 'key' => 'admin.icon_image',
@@ -118,7 +107,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 3,
                 'group' => 'Admin',
             ),
-            9 => 
+            8 => 
             array (
                 'id' => 10,
                 'key' => 'admin.google_analytics_client_id',
@@ -129,7 +118,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 5,
                 'group' => 'Admin',
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 11,
                 'key' => 'site.keyboards',
@@ -140,7 +129,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 3,
                 'group' => 'Site',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 12,
                 'key' => 'social.facebook',
@@ -151,7 +140,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 7,
                 'group' => 'Social',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 13,
                 'key' => 'social.twitter',
@@ -162,40 +151,40 @@ class SettingsTableSeeder extends Seeder
                 'order' => 8,
                 'group' => 'Social',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 14,
                 'key' => 'social.instagram',
                 'display_name' => 'Instagram',
-                'value' => 'https://www.instagram.com/canaldelfintv/',
+                'value' => '#',
                 'details' => NULL,
                 'type' => 'text',
                 'order' => 9,
                 'group' => 'Social',
             ),
-            14 => 
+            13 => 
             array (
                 'id' => 15,
                 'key' => 'social.youtube',
                 'display_name' => 'Youtube',
-                'value' => 'https://www.youtube.com/@canaldelfintv',
+                'value' => '#',
                 'details' => NULL,
                 'type' => 'text',
                 'order' => 10,
                 'group' => 'Social',
             ),
-            15 => 
+            14 => 
             array (
                 'id' => 16,
                 'key' => 'social.whatsapp',
                 'display_name' => 'WhatsApp',
-                'value' => '59169024457',
+                'value' => '59175199157',
                 'details' => NULL,
                 'type' => 'text',
                 'order' => 11,
                 'group' => 'Social',
             ),
-            16 => 
+            15 => 
             array (
                 'id' => 18,
                 'key' => 'acerca-de.banner',
@@ -206,7 +195,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 12,
                 'group' => 'Acerca de',
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 19,
                 'key' => 'acerca-de.description',
@@ -217,7 +206,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 13,
                 'group' => 'Acerca de',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 20,
                 'key' => 'site.address',
@@ -225,10 +214,10 @@ class SettingsTableSeeder extends Seeder
                 'value' => NULL,
                 'details' => NULL,
                 'type' => 'text',
-                'order' => 14,
+                'order' => 16,
                 'group' => 'Site',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 21,
                 'key' => 'site.phone',
@@ -236,10 +225,10 @@ class SettingsTableSeeder extends Seeder
                 'value' => NULL,
                 'details' => NULL,
                 'type' => 'text',
-                'order' => 16,
+                'order' => 17,
                 'group' => 'Site',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 22,
                 'key' => 'site.email',
@@ -247,10 +236,10 @@ class SettingsTableSeeder extends Seeder
                 'value' => NULL,
                 'details' => NULL,
                 'type' => 'text',
-                'order' => 17,
+                'order' => 21,
                 'group' => 'Site',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 23,
                 'key' => 'site.navbar_logo',
@@ -261,7 +250,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 4,
                 'group' => 'Site',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 24,
                 'key' => 'streaming.iframe',
@@ -272,7 +261,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 19,
                 'group' => 'Streaming',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 25,
                 'key' => 'streaming.status',
@@ -283,7 +272,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 18,
                 'group' => 'Streaming',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 26,
                 'key' => 'site.loader',
@@ -291,7 +280,60 @@ class SettingsTableSeeder extends Seeder
                 'value' => '',
                 'details' => NULL,
                 'type' => 'image',
+                'order' => 14,
+                'group' => 'Site',
+            ),
+            24 => 
+            array (
+                'id' => 27,
+                'key' => 'site.font',
+                'display_name' => 'Font',
+                'value' => 'Roboto',
+                'details' => '{
+"options": {
+"Roboto": "Roboto",
+"Montserrat": "Montserrat",
+"Lora": "Lora",
+"Ubuntu": "Ubuntu",
+"Dosis": "Dosis",
+"Martel": "Martel"
+}
+}',
+                'type' => 'select_dropdown',
                 'order' => 15,
+                'group' => 'Site',
+            ),
+            25 => 
+            array (
+                'id' => 28,
+                'key' => 'site.primary-color',
+                'display_name' => 'Primary Color',
+                'value' => '#017601',
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 22,
+                'group' => 'Site',
+            ),
+            26 => 
+            array (
+                'id' => 29,
+                'key' => 'site.primary-color-rgb',
+                'display_name' => 'Primary Color RGB',
+                'value' => '1,118,1',
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 23,
+                'group' => 'Site',
+            ),
+            27 => 
+            array (
+                'id' => 30,
+                'key' => 'site.primary-color-text',
+                'display_name' => 'Primary Color Text',
+                'value' => NULL,
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 24,
                 'group' => 'Site',
             ),
         ));

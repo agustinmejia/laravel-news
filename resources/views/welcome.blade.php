@@ -24,7 +24,7 @@
     <main id="main">
 
         <!-- ======= Hero Slider Section ======= -->
-        <section id="hero-slider" class="hero-slider">
+        <section id="hero-slider" class="hero-slider" style="padding-top: 10px">
             <div class="container-md" data-aos="fade-in">
                 <div class="row">
                 <div class="col-12">
