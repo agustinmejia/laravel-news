@@ -44,23 +44,22 @@ class install extends Command
         if(!$database->num_rows){
             $connection->query("CREATE DATABASE ".env('DB_DATABASE'));
             $this->info("Base de datos creada");
+        }
+        $empty_database = false;
+        try {
+            DB::table('users')->first();
+        } catch (\Throwable $th) {
+            $empty_database = true;
+        }
+        if($empty_database  || $this->option('reset')){
+            $this->call('key:generate');
+            $this->call('migrate:fresh');
+            $this->call('db:seed');
+            $this->call('storage:link');
+            $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => ['config', 'voyager_avatar']]);
+            $this->info('Gracias por instalar LaravelNews');
         }else{
-            $empty_database = false;
-            try {
-                DB::table('users')->first();
-            } catch (\Throwable $th) {
-                $empty_database = true;
-            }
-            if($empty_database  || $this->option('reset')){
-                $this->call('key:generate');
-                $this->call('migrate:fresh');
-                $this->call('db:seed');
-                $this->call('storage:link');
-                $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => ['config', 'voyager_avatar']]);
-                $this->info('Gracias por instalar LaravelNews');
-            }else{
-                $this->error('Ya se encuentra instalado');
-            }
+            $this->error('Ya se encuentra instalado');
         }
     }
 }

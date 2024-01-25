@@ -76,6 +76,7 @@
                 -webkit-line-clamp: 10;
                 -webkit-box-orient: vertical;
                 white-space: normal;
+                color: var(--color-default) !important;
             }
         </style>
 
@@ -235,7 +236,7 @@
                     <div class="row justify-content-between">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         <div class="copyright">
-                        © Copyright <strong><span>DelfinTV</span></strong>. Todos los derechos reservados
+                        © Copyright <strong><span>{{ setting('site.title') }}</span></strong>. Todos los derechos reservados
                         </div>
 
                         <div class="credits">

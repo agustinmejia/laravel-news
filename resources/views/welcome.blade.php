@@ -102,7 +102,7 @@
                                 <a href="{{ url('post/'.$post->slug) }}"><img src="{{ asset('storage/'.$post->banner) }}" alt="{{ $post->title }}" class="img-fluid"></a>
                                 <div class="post-meta"><span class="date">{{ $post->category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
                                 <h2><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
-                                <p class="mb-4 d-block">{{ $post->subtitle }}</p>
+                                <p class="mb-4 d-block color-default">{{ $post->subtitle }}</p>
 
                                 @if ($post->user)
                                     <div class="d-flex align-items-center author">
@@ -255,7 +255,7 @@
                                 <div>
                                     <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
                                     <h3><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h3>
-                                    <p>{{ $post->subtitle }}</p>
+                                    <p class="color-default">{{ $post->subtitle }}</p>
                                     @if ($post->user)
                                         <div class="d-flex align-items-center author">
                                             <div class="photo"><img src="{{ asset('storage/'.$post->user->avatar) }}" alt="{{ $post->user->name }}" class="img-fluid"></div>
@@ -282,7 +282,7 @@
                                             <div class="post-meta"><span class="date">{{ $category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
                                             <h2 class="mb-2"><a href="{{ url('post/'.$post->slug) }}">{{ $post->title }}</a></h2>
                                             <span class="author mb-3 d-block">{{ $post->user ? $post->user->name : '' }}</span>
-                                            <p class="mb-4 d-block">{{ $post->subtitle }}</p>
+                                            <p class="mb-4 d-block color-default">{{ $post->subtitle }}</p>
                                         </div>
                                     </div>    
                                 @endif

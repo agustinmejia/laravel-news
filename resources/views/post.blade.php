@@ -23,23 +23,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 post-content" data-aos="fade-up">
-
                         @php
                             $meses = array("","Ene","Feb","Mar","Abr","May","Jun","Jul","Agos","Sept","Oct","Nov","Dic");
                             $publish_date = Carbon\Carbon::parse($post->publish_date);
                         @endphp
-
                         <!-- ======= Single Post Content ======= -->
                         <div class="single-post">
                             <div class="post-meta"><span class="date">{{ $post->category->name }}</span> <span class="mx-1">&bullet;</span> <span>{{ $publish_date->format('d').' de '.$meses[($publish_date->format('n'))].' de '.$publish_date->format('Y') }}</span></div>
-                            <h1 class="mb-5">{{ $post->title }}</h1>
-                            <p><span class="firstcharacter">{{ substr($post->subtitle, 0, 1) }}</span>{{ substr($post->subtitle, 1) }}</p>
+                            <h1 class="mb-5 color-default">{{ $post->title }}</h1>
+                            <p class="text-justify color-default"><span class="firstcharacter">{{ substr($post->subtitle, 0, 1) }}</span>{{ substr($post->subtitle, 1) }}</p>
 
                             <div class="col-md-12 my-4">
                                 <img src="{{ Voyager::image($banner) }}" alt="{{ $post->title }}" class="img-fluid" style="width: 100% !important">
                             </div>
                             
-                            {!! $post->body !!}
+                            <div class="color-default text-justify">{!! $post->body !!}</div>
 
                             <br><br>
                             <table align="right">

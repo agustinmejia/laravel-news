@@ -18,7 +18,10 @@ Route::get('login', function () {
 })->name('login');
 
 Route::get('/', function () {
-    return view('welcome');
+    if(setting('site.status')){
+        return view(setting('site.template').'welcome');
+    }
+    return redirect('admin');
 });
 
 Route::get('about', function () {
@@ -33,14 +36,14 @@ Route::get('category/{slug}', function ($slug) {
     $category = App\Models\Category::with(['posts' => function($q){
                     $q->where('status', 'publicado')->orderBy('order')->orderBy('id', 'DESC')->orderBy('views', 'DESC')->where('deleted_at', NULL);
                 }])->where('slug', $slug)->first();
-    return view('category', compact('category'));
+    return view(setting('site.template').'category', compact('category'));
 });
 
 Route::get('post/{slug}', function ($slug) {
     $post = App\Models\Post::where('slug', $slug)->first();
-    $post->views = $post->views +1;
-    $post->update();
-    return view('post', compact('post'));
+    // $post->views = $post->views +1;
+    // $post->update();
+    return view(setting('site.template').'post', compact('post'));
 });
 
 Route::get('videos', function () {
