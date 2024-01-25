@@ -85,7 +85,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 1,
                 'group' => 'Admin',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 8,
                 'key' => 'admin.loader',
@@ -214,7 +214,7 @@ class SettingsTableSeeder extends Seeder
                 'value' => '+59175199157',
                 'details' => NULL,
                 'type' => 'text',
-                'order' => 17,
+                'order' => 21,
                 'group' => 'Site',
             ),
             18 => 
