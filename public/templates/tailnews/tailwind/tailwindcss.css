@@ -28,7 +28,7 @@
 }
 /*navbar*/
 .navbar > li.active > a, .navbar > li:hover > a {
-	border-color: #ce2626;
+	border-color: #4AF73E;
 }
 /*Dropdown*/
 .dropdown-menu {

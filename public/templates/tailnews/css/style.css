@@ -76,8 +76,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: inherit;
-  font-weight: inherit;
+  /* font-size: inherit;
+  font-weight: inherit; */
 }
 
 /*
@@ -1246,7 +1246,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 /*navbar*/
 .navbar > li.active > a, .navbar > li:hover > a {
-	border-color: #ce2626;
+	border-color: #4AF73E;
 }
 /*Dropdown*/
 .dropdown-menu {

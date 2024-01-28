@@ -18,6 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->smallInteger('top')->nullable();
+            $table->smallInteger('advertisement')->nullable();
             $table->smallInteger('order')->nullable();
             $table->timestamps();
             $table->softDeletes();

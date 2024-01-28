@@ -25,11 +25,19 @@ Route::get('/', function () {
 });
 
 Route::get('about', function () {
-    return view('about');
+    return view(setting('site.template').'about');
 });
 
 Route::get('contact', function () {
     return view('contact');
+});
+
+Route::get('policies-privacy', function () {
+    return view(setting('site.template').'policies-privacy');
+});
+
+Route::get('terms-use', function () {
+    return view(setting('site.template').'terms-use');
 });
 
 Route::get('category/{slug}', function ($slug) {
@@ -41,8 +49,11 @@ Route::get('category/{slug}', function ($slug) {
 
 Route::get('post/{slug}', function ($slug) {
     $post = App\Models\Post::where('slug', $slug)->first();
-    // $post->views = $post->views +1;
-    // $post->update();
+    if(!$post){
+        return view(setting('site.template').'errors.404');    
+    }
+    $post->views = $post->views +1;
+    $post->update();
     return view(setting('site.template').'post', compact('post'));
 });
 
